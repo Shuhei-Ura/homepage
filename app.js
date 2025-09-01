@@ -1,4 +1,4 @@
-// 保存されるかのテスト
+// GitHubに保存されるかのテスト
 
 const express = require("express");
 const path = require("path");
