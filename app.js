@@ -336,7 +336,7 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
     try {
       await sendInquiryNotification(notifyPayload);
       // 必要なら本人へ自動返信
-      // await sendThanksToCustomer(email, name);
+      await sendThanksToCustomer(email, name);
     } catch (mailErr) {
       console.error("CONTACT mail send error:", mailErr);
       // ここではエラーを握りつぶし、画面は成功で返す
