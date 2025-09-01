@@ -1,0 +1,369 @@
+/* ===== Hero ===== */
+.hero {
+  width: 100%;
+  height: clamp(360px, 100vh, 900px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 各スライド */
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: heroFade 18s infinite ease-in-out;
+}
+.hero__slide:nth-child(1) { animation-delay: 0s; }
+.hero__slide:nth-child(2) { animation-delay: 6s; }
+.hero__slide:nth-child(3) { animation-delay: 12s; }
+
+/* imgを全面表示 */
+.hero__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* はみ出しをトリミング */
+  display: block;
+}
+
+/* フェードアニメーション */
+@keyframes heroFade {
+  0%   { opacity: 0 }
+  6%   { opacity: 1 }
+  28%  { opacity: 1 }
+  34%  { opacity: 0 }
+  100% { opacity: 0 }
+}
+
+/* オーバーレイ（暗幕） */
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.28);
+  pointer-events: none;
+}
+
+/* 中央テキスト */
+.hero__title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  font-size: clamp(20px, 3.8vw, 38px);
+  font-weight: 800;
+  line-height: 1.5;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+  margin: 0;
+  width: min(92%, 960px);
+}
+
+/* ユーザーがアニメーションを避けたい場合 */
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { animation: none; opacity: 1; }
+  .hero__slide:not(:first-child) { display: none; }
+}
+/*ここまでheroセクション*/
+
+
+
+/* aboutセクション　　余白と中央寄せ（必要に応じて調整） */
+.section-lead {
+  padding: 60px 16px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  /* モバイル：1カラム（h2 → 説明 → 写真） */
+  display: grid;
+  gap: 16px;
+  grid-template-areas:
+    "heading"
+    "body"
+    "image";
+}
+
+/* 要素の割り当て */
+.section-lead__title { grid-area: heading; margin: 0; }
+.section-lead__desc  { grid-area: body;    margin: 8px 0 0; line-height: 1.8; color: #333; }
+.section-lead__media { grid-area: image;   margin: 0; }
+
+/* 画像は16:9でトリミング、横幅フル */
+.section-lead__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* タイポ（お好みで） */
+.section-lead__title {
+  margin: 0 0 16px;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: #0f2540;
+}
+
+.section-lead__title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: #f57c1f;
+}
+
+.section-lead__desc  { 
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+
+/* PC（768px以上）：2カラム（左：タイトル＋説明、右：写真） */
+@media (min-width: 768px) {
+  .section-lead {
+    gap: 24px 40px;
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-areas:
+      "heading image"
+      "body    image";
+    align-items: center; /* 画像とテキストの高さ合わせ */
+  }
+
+  .section-lead__title { font-size: 28px; }
+  .section-lead__desc  { font-size: 16px; }
+}
+
+/* 導線のボタン　*/
+.section-lead__actions {
+  margin-top: 20px;
+}
+
+.btn-readmore {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #f57c1f;       /* オレンジアクセント */
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+
+.btn-readmore:hover {
+  background: #d96b1c;       /* 少し濃いオレンジに変化 */
+}
+
+/* 手書き風デコレーション */
+.section-lead {
+  position: relative; /* デコ画像の基準にする */
+}
+
+.section-lead__deco {
+  position: absolute;
+  bottom: -120px;   /* 画像の下に少しはみ出す */
+  right: -100px;    /* 右にずらす */
+  width: 600px;    /* サイズ調整 */
+  opacity: 0.8;    /* ほんのり透けさせるとオシャレ */
+  pointer-events: none; /* クリック操作を邪魔しない */
+    /* 彩度を落とす */
+  filter: saturate(60%) brightness(1.1);   /* 彩度を60%にする */
+  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
+}
+
+@media (max-width: 768px) {
+  .section-lead__deco {
+    width: 600px;
+    bottom: -130px;
+    right: -70px;
+    opacity: 0.8;
+  }
+}
+/*ここまでaboutセクション*/
+
+
+
+/*　recruitセクション*/
+/* Recruit用：PCで「画像 左／テキスト 右」にする */
+@media (min-width: 768px) {
+  .section-lead--recruit {
+    /* aboutは "heading image" / "body image" だったのを左右反転 */
+    grid-template-columns: 1fr 1.1fr;
+    grid-template-areas:
+      "image heading"
+      "image body";
+  }
+}
+/* recruitの画像にデコを重ねる */
+.section-lead--recruit .section-lead__media { position: relative; }
+
+.section-lead__deco--recruit {
+  position: absolute;
+  bottom: -120px;      /* 画像から少しはみ出す */
+  left: 0px;         /* 左寄せ */
+  width: 20px;       /* サイズはお好みで */
+  opacity: 0.9;      /* 背景っぽく控えめに */
+  pointer-events: none;
+  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
+  z-index: 2;         /* 画像より前面に */
+}
+
+/* モバイル時は少し小さく＆はみ出し量を控えめに */
+@media (max-width: 768px){
+  .section-lead__deco--recruit{
+    width: 200px;
+    bottom: -140px;
+    left: 0px;
+    opacity: 0.9;
+  }
+}
+
+
+/* ===== 事業紹介セクション ===== */
+.business{ padding:48px 16px; }
+.business__container{ max-width:1200px; margin:0 auto }
+
+
+/* グリッド：スマホ1列 / PC2列 */
+.business__grid{
+  display:grid; gap:18px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px){
+  .business__grid{ grid-template-columns: 1fr 1fr }
+}
+
+.business-card{
+  padding:16px; 
+}
+.business-card__heading {
+  position: absolute;
+  top: 50%;             /* 縦の中央 */
+  left: 16px;           /* 左に少し余白 */
+  transform: translateY(-50%); /* 真ん中に */
+  margin: 0;
+  font-size: 25px;
+  font-weight: 800;
+  color: #fff;          /* 白字 */
+  text-shadow: 0 2px 6px rgba(0,0,0,.5); /* 見やすくするため影 */
+  z-index: 2;
+}
+.business-card__media {
+  position: relative;   /* 見出し配置の基準 */
+  margin: 0 0 12px;
+}
+.business-card__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+.business-card__desc{
+  margin:0; color:#333; line-height:1.85; font-size:15px;
+}
+
+/* ========== Demoセクション ========== */
+/* PCでもスマホでも1カラム（縦並び） */
+.section-lead--demo {
+  display: block; /* Gridをやめる */
+  text-align: left; /* テキストは左寄せのまま */
+}
+
+.section-lead--demo .section-lead__media {
+  margin-top: 24px;   /* 文章と画像の間に余白 */
+  text-align: center; /* 画像だけ中央寄せ */
+}
+
+/* デモの画像だけはオリジナル比率を使う */
+.section-lead--demo .section-lead__media img {
+  display: block;          /* 中央寄せするなら margin: auto とセット */
+  margin: 0 auto;
+  max-width: 460px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+
+  aspect-ratio: auto;      /* ← これで16:9強制を解除 */
+  object-fit: contain;     /* ← 画像を切り抜かず縮小 */
+}
+
+
+/* ========== Blogセクション ========== */
+/* PCでは2カラム配置（左テキスト／右画像） */
+@media (min-width: 768px) {
+  .section-lead--blog {
+    display: grid;
+    gap: 24px 40px;
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-areas:
+      "heading image"
+      "body    image";
+    align-items: center;
+  }
+}
+
+
+/* ===== 問い合わせCTAバナー ===== */
+.cta-banner{
+  background: linear-gradient(90deg, #1f3556, #29466c); /* ネイビー系 */
+  color:#fff;
+  padding: clamp(28px, 5vw, 48px) 0;
+  margin-top: 40px;
+}
+.cta-banner__inner{
+  width:min(1200px, 92%);
+  margin-inline:auto;
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  gap: 16px 24px;
+}
+.cta-banner__title{
+  margin:0 0 6px;
+  font-size: clamp(20px, 3.2vw, 32px);
+  font-weight:800;
+  line-height:1.25;
+}
+.cta-banner__desc{
+  margin:0;
+  color: rgba(255,255,255,.9);
+  line-height:1.8;
+  font-size: clamp(14px, 1.6vw, 16px);
+}
+.cta-banner__actions{ display:flex; align-items:center; gap:12px }
+.cta-banner__button{
+  display:inline-block;
+  padding: 16px 32px;     /* ← 縦横の余白を大きく */
+  font-size: 18px;        /* ← 文字も大きく */
+  border-radius: 999px;
+  background:#f57c1f;
+  color:#fff; font-weight:800;
+  text-decoration:none;
+  border:1px solid transparent;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+  transition: transform .06s ease, filter .2s ease;
+}
+
+.cta-banner__button:hover{ filter:brightness(.95) }
+.cta-banner__button:active{ transform: translateY(1px) }
+.cta-banner__button:focus-visible{
+  outline: 3px solid rgba(255,255,255,.6);
+  outline-offset: 2px;
+}
+
+/* スマホ：縦並び＆中央寄せ */
+@media (max-width: 768px){
+  .cta-banner__inner{ grid-template-columns: 1fr; text-align:center }
+  .cta-banner__actions{ justify-content:center }
+}

@@ -1,0 +1,518 @@
+/* ===== About Hero Title ===== */
+.recruit-hero {
+  position: relative;
+  min-height: clamp(360px, 48vh, 620px); /* Home より少し浅めで差別化 */
+  overflow: hidden;
+  padding: 80px 16px 20px;
+}
+
+.recruit-hero__bg {
+  display: block;
+  width: 100%;
+  max-width: 1200px;   /* ← 画像も1200px幅で制御 */
+  max-height: clamp(360px, 60vh, 620px);
+  margin: 0 auto;      /* ← 中央寄せ */
+  border-radius: 8px;  /* 任意：他と統一感出すなら角丸 */
+  object-fit: cover;
+}
+
+.recruit-hero__text {
+  position: absolute;
+  top: 50%;                  /* 縦中央寄せ */
+  left: 50%;                 /* 横中央寄せ */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  padding: 20px 16px 0;            /* スマホ用に左右余白 */
+}
+
+.recruit-hero__title {
+  font-size: clamp(22px, 3.6vw, 42px);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  white-space: nowrap;   /* ← これで1行に収まる */
+}
+
+.recruit-hero__sub {
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 500;
+  line-height: 1.6;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  white-space: nowrap;   /* ← これで1行に収まる */
+}
+
+@media (min-width: 768px) {
+  .recruit-hero__title {
+    font-size: 32px;
+  }
+}
+
+/* ===== recruitメッセージとしてAbout Story　の流用 ===== */
+.about-story {
+  padding: 24px 16px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  gap: 20px;
+
+  /* モバイル：縦並び（タイトル → 本文 → 画像） */
+  grid-template-areas:
+    "title"
+    "text"
+    "media";
+}
+
+/* 各エリア割り当て */
+.about-story__title { grid-area: title; }
+.about-story__text  { grid-area: text; }
+.about-story__media { grid-area: media; }
+
+/* タイトル（代表メッセージ） */
+.about-story__title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1b1f23;
+}
+.about-story__title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: #f57c1f; /* オレンジのアンダーライン */
+}
+
+/* 本文 */
+.about-story__desc {
+  margin: 0;
+  line-height: 1.9;
+  color: #333;
+  font-size: 15px;
+  padding-bottom:10px;
+}
+.about-story__desc p { margin: 0 0 12px; }
+
+/* 画像 */
+.about-story__media {
+  margin: 0;
+}
+.about-story__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* PC（768px～）：左＝タイトル＋本文、右＝画像 */
+@media (min-width: 768px) {
+  .about-story {
+    gap: 24px 40px;
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-areas:
+      "title media"
+      "text  media";
+    align-items: start;
+  }
+
+  .about-story__title { font-size: 24px; }
+  .about-story__desc  { font-size: 16px; }
+}
+
+
+/* ===== Curriculum Timeline ===== */
+.curriculum { padding: 24px 16px 32px; }
+.curriculum__container {
+  max-width: 1200px; margin: 0 auto;
+}
+/* タイトル（代表メッセージ） */
+.curriculum-story__title {
+  margin: 0 0 8px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #1b1f23;
+}
+.curriculum__title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: #f57c1f; /* オレンジのアンダーライン */
+}
+
+.step__desc{
+    padding-bottom:10px;
+}
+
+
+.steps {
+  list-style: none; padding: 32px 0 0; margin: 0;
+  display: grid; gap: 24px;
+}
+
+/* PC 横並び 4カラム + つなぎライン */
+@media (min-width: 900px) {
+  .steps {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    position: relative;
+  }
+  .steps::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 46px;
+    height: 4px;
+    background: linear-gradient(90deg, #e6edf4 0%, #dfe7ef 100%);
+    border-radius: 999px;
+  }
+}
+
+.step {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e9edf2;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  padding: 56px 16px 20px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.09);
+}
+
+/* ヘッダー（番号 + アイコン） */
+.step__head {
+  position: absolute; left: 16px; right: 16px; top: -28px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.step__num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 999px;
+  background: #0c3766; color: #fff; font-weight: 800;
+  font-size: 16px; letter-spacing: .03em;
+  box-shadow: 0 6px 12px rgba(12,55,102,.25);
+}
+
+.step__icon {
+  width: 54px; height: 54px; border-radius: 12px;
+  background: #f6f9fc; border: 1px solid #e7edf4;
+  display: grid; place-items: center;
+  box-shadow: 0 8px 16px rgba(14,30,63,.06);
+  overflow: hidden; margin: 0;
+}
+.step__icon img { width: 70%; height: auto; display: block; }
+
+/* 本文 */
+.step__title {
+  margin: 8px 4px 6px;
+  font-size: 18px; font-weight: 800; color: #1b1f23;
+}
+.step__desc {
+  margin: 0 4px;
+  color: #4a5568; line-height: 1.8; font-size: 14px;
+}
+
+/* SP 縦タイムライン（左にライン） */
+@media (max-width: 899.98px) {
+  .steps { position: relative; }
+  .steps::before {
+    content: ""; position: absolute; left: 24px; top: 0; bottom: 0;
+    width: 4px; background: #e6edf4; border-radius: 999px;
+  }
+  .step {
+    padding-left: 76px;
+  }
+  .step__head { left: -2px; right: auto; top: 8px; }
+  .step + .step { margin-top: 20px; }
+}
+
+/* ちょいアクセント（番号カラーをブランドに合わせるならここを変更） */
+.step:nth-child(2) .step__num { background: #f57c1f; }
+.step:nth-child(3) .step__num { background: #0ea5e9; }
+.step:nth-child(4) .step__num { background: #16a34a; }
+
+/* ===== 使用言語セクション ===== */
+.recruit-tech {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+}
+
+.recruit-tech__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1b1f23;
+  margin-bottom: 20px;
+  position: relative;
+}
+.recruit-tech__title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  border-radius: 999px;
+  background: #f57c1f; /* ブランドオレンジ */
+  margin-top: 10px;
+}
+
+/* 本文の読みやすさを最優先（行長/行間/余白） */
+.recruit-tech__body {
+  max-width: 1000px;      /* 行長を抑えて読みやすく */
+  color: #333;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.recruit-tech__body p {
+  margin: 0 0 1.2em;
+}
+
+.recruit-tech__body strong {
+  font-weight: 800;
+}
+
+/* Recruit: サービスカード */
+.service-section{
+  max-width: 1200px;           /* 既存ページに合わせる */
+  margin: 0 auto;
+  padding-bottom:20px;
+}
+
+.service-grid {
+  display: grid;
+  gap: 24px;
+  /* PC（1200px幅）では4列 */
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;   /* 中央寄せ */
+}
+
+@media (max-width: 768px) {
+  .service-grid {
+    /* スマホでは2列 */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.service-card{
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  padding: 20px;
+}
+
+
+
+.icon-wrap{
+  width: 100%;
+  aspect-ratio: 1 / 1;         /* 正方形に統一 */
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--card), #000 6%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.icon-wrap img{
+  width: 82%;
+  height: 82%;
+  object-fit: contain;          /* 透過PNGを綺麗に収める */
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.18));
+}
+
+.service-title{
+  font-size: .98rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* 画面幅が狭い時の余白最適化 */
+@media (max-width: 640px){
+  .service-card{ padding: 16px; }
+  .icon-wrap{ margin-bottom: 10px; }
+}
+
+/* sr-only（未定義の場合の保険） */
+.sr-only{
+  position:absolute !important;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0);
+  white-space:nowrap; border:0;
+}
+
+
+/* タブレット以上で少し余白を広げる */
+@media (min-width: 768px) {
+  .recruit-tech {
+    padding: 64px 24px 40px;
+  }
+  .recruit-tech__title {
+    font-size: 28px;
+  }
+}
+
+/* 大画面では行間と余白をほんのり調整 */
+@media (min-width: 1024px) {
+  .recruit-tech__body {
+    line-height: 1.95;
+  }
+}
+
+
+
+/* ===== Recruit Demo Section ===== */
+.recruit-demo {
+  padding: 20px 16px;
+  background: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recruit-demo__content {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  grid-template-areas:
+    "text"
+    "media";
+}
+
+/* 左側テキスト */
+.recruit-demo__text {
+  grid-area: text;
+  color: #333;
+}
+.recruit-demo__title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: #1b1f23;
+}
+.recruit-demo__title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: #f57c1f;
+  margin-top: 8px;
+  border-radius: 999px;
+}
+.recruit-demo__text p {
+  margin-bottom: 16px;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* 右側の画像リンク */
+.recruit-demo__media {
+  grid-area: media;
+  text-align: center;
+}
+.recruit-demo__media img {
+  max-width: 480px;
+  width: 100%;
+  height: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+/* PCレイアウト */
+@media (min-width: 768px) {
+  .recruit-demo__content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "text media";
+  }
+  .recruit-demo__title {
+    font-size: 26px;
+  }
+}
+
+/* ===== Recruit CTAセクション ===== */
+.recruit-cta {
+  padding: 20px 16px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recruit-cta p {
+  margin-bottom: 16px;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #333;
+}
+
+.recruit-cta .cta-box {
+  margin-top: 20px;
+}
+
+.cta-box{
+  text-align: center;
+}
+
+/* --- ボタンは前のネイビーバージョンを流用 --- */
+.cta-btn--prime {
+  --cta1: #0d1b2a;
+  --cta2: #1b263b;
+  --ring: rgba(13, 27, 42, .45);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 280px;
+  height: 56px;
+  padding: 0 28px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: .02em;
+  background: linear-gradient(180deg, var(--cta2), var(--cta1));
+  border-radius: 9999px;
+  box-shadow:
+    0 12px 28px rgba(13, 27, 42,.35),
+    0 4px 10px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.15);
+  transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.cta-btn--prime:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 34px rgba(13,27,42,.45),
+    0 6px 14px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.cta-btn--prime:active {
+  transform: translateY(0);
+  filter: brightness(.95);
+}
+
+.cta-btn--prime:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.cta-caption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6b7280;
+}

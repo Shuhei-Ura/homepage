@@ -1,0 +1,59 @@
+.blogdetail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.blogdetail-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.blogdetail-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #667085;
+  margin-bottom: 32px;
+}
+
+.pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+.pill-admin { color: #b15b00; border-color: #ffd8a8; background: #fff3e0; }
+.pill-emp   { color: #0f6b37; border-color: #b8f0d2; background: #e9fbf1; }
+
+.blogdetail-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-line; /* 改行保持 */
+  margin-bottom: 40px;
+}
+
+.blogdetail-footer {
+  text-align: center;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  text-decoration: none;
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  transition: background .15s ease, transform .1s ease;
+}
+.btn-back:hover {
+  background: #eaeaea;
+  transform: translateY(-1px);
+}

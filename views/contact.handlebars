@@ -1,0 +1,54 @@
+<!--SEO対策のh1 非表示 -->
+<h1 class="sr-only">株式会社Respoint Okinawaへのお問い合わせ｜採用応募・ご相談はこちら</h1>
+
+<!--問い合わせフォーム -->
+<section class="contact" aria-labelledby="contact-title">
+  <div class="contact__container">
+    <h1 id="contact-title" class="contact__title">お問い合わせ</h1>
+    <p class="contact__lead">
+      採用に関するご相談、サービスに関するご質問など、以下のフォームからお問い合わせください。
+      <span class="req-note"><span aria-hidden="true">*</span> は必須項目です。</span>
+    </p>
+
+    <form class="contact-form" method="post" action="/contact" novalidate>
+      {{!-- 会社（任意） --}}
+      <div class="form-field">
+        <label for="company" class="form-label">会社名（任意）</label>
+        <input type="text" id="company" name="company" class="form-input" autocomplete="organization" placeholder="例）株式会社Respoint Okinawa">
+      </div>
+
+      {{!-- 名前（必須） --}}
+      <div class="form-field">
+        <label for="name" class="form-label">お名前 <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="name" name="name" class="form-input" required autocomplete="name" placeholder="例）山田 太郎" aria-describedby="name-help">
+        <small id="name-help" class="form-help">本名または担当者名をご記入ください。</small>
+      </div>
+
+      {{!-- メール（必須） --}}
+      <div class="form-field">
+        <label for="email" class="form-label">メールアドレス <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" class="form-input" required inputmode="email" autocomplete="email" placeholder="例）taro@example.com" aria-describedby="email-help">
+        <small id="email-help" class="form-help">ご連絡可能なメールアドレスをご記入ください。</small>
+      </div>
+
+      {{!-- 問い合わせ内容（必須） --}}
+      <div class="form-field">
+        <label for="message" class="form-label">お問い合わせ内容 <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" class="form-textarea" rows="8" required placeholder="ご質問・ご相談の内容をご記入ください。"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">送信する</button>
+      </div>
+
+      {{!-- 成功／エラー表示用の領域（後でサーバ側から埋め込む想定） --}}
+      {{#if success}}
+        <p class="form-result form-result--ok" role="status">送信が完了しました。担当よりご連絡いたします。</p>
+      {{/if}}
+      {{#if error}}
+        <p class="form-result form-result--ng" role="alert">送信に失敗しました。お手数ですが、もう一度お試しください。</p>
+      {{/if}}
+    </form>
+  </div>
+</section>
+

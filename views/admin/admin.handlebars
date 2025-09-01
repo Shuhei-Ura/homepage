@@ -1,0 +1,68 @@
+<section class="admin-container">
+  <header class="admin-header">
+    <h1 class="admin-title">管理メニュー</h1>
+
+    <div class="admin-actions">
+      {{#if isAdmin}}
+        <span class="role-badge">Admin</span>
+      {{else}}
+        <span class="role-badge role-badge--user">User</span>
+      {{/if}}
+
+      <form action="/logout" method="POST" class="logout-form">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button class="btn btn--ghost" type="submit">ログアウト</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="card-grid">
+    <!-- 共通：ブログ新規 -->
+    <a class="card" href="/admin/newpost">
+      <div class="card-body">
+        <h2 class="card-title">ブログ新規投稿</h2>
+        <p class="card-text">タイトルと本文を入力して記事を作成します。</p>
+        <span class="card-cta">開く →</span>
+      </div>
+    </a>
+
+    <!-- 共通：ブログ一覧 -->
+    <a class="card" href="/admin/posts-list">
+      <div class="card-body">
+        <h2 class="card-title">ブログ一覧</h2>
+        <p class="card-text">作成済みの投稿を確認・編集・削除します。</p>
+        <span class="card-cta">開く →</span>
+      </div>
+    </a>
+
+    {{#if isAdmin}}
+      <!-- 管理者専用：社員管理 -->
+      <a class="card" href="/admin/users">
+        <div class="card-body">
+          <h2 class="card-title">社員管理</h2>
+          <p class="card-text">社員一覧の確認・登録・編集を行います。</p>
+          <span class="card-cta">開く →</span>
+        </div>
+      </a>
+
+      <!-- 管理者専用：お問い合わせ -->
+      <a class="card" href="/admin/contacts-list">
+        <div class="card-body">
+          <h2 class="card-title">お問い合わせ</h2>
+          <p class="card-text">問い合わせ内容の確認と対応ステータス更新。</p>
+          <span class="card-cta">開く →</span>
+        </div>
+      </a>
+    {{/if}}
+  </div>
+  <form action="/logout" method="POST" class="logout-form">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="btn btn--logout" type="submit" aria-label="ログアウト">
+      <!-- アイコン（任意） -->
+      <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M10 17l5-5-5-5v10zM4 4h7v2H6v12h5v2H4V4z" fill="currentColor"/>
+      </svg>
+      ログアウト
+    </button>
+  </form>
+</section>

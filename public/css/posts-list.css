@@ -1,0 +1,54 @@
+.admin-container { max-width:1200px; margin:0 auto; padding:80px 16px; }
+.admin-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; }
+.admin-title { font-size:1.8rem; }
+
+.notice { background:#e8f5e9; color:#1b5e20; padding:10px 12px; border-radius:8px; margin-bottom:12px; }
+.error  { background:#ffebee; color:#b71c1c; padding:10px 12px; border-radius:8px; margin-bottom:12px; }
+.muted  { color:#607d8b; }
+
+.search-bar { display:flex; gap:8px; margin-bottom:12px; }
+.search-bar input[type="text"] {
+  flex:1; padding:10px 12px; border:1px solid #cfd8dc; border-radius:10px; font-size:1rem;
+}
+
+.list-card {
+  background:#fff; border:1px solid #e0e0e0; border-radius:16px; padding:16px;
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
+}
+
+.table-wrapper { overflow-x:auto; }
+.post-table { width:100%; border-collapse:collapse; }
+.post-table th, .post-table td { padding:10px 12px; border-bottom:1px solid #eceff1; text-align:left; vertical-align:middle; }
+.post-table th { background:#f7f9fc; font-weight:700; }
+.post-table tbody tr:hover { background:#fafafa; }
+.title-cell .title-link { color:#0d47a1; text-decoration:none; }
+.title-cell .title-link:hover { text-decoration:underline; }
+
+.actions { display:flex; gap:8px; align-items:center; }
+.actions form { display:inline; }
+
+.btn {
+  padding:10px 14px; border-radius:10px; border:1px solid #cfd8dc; background:#fff; cursor:pointer; font-weight:700;
+}
+.btn:hover { background:#eceff1; }
+.btn--primary { background:#0d47a1; color:#fff; border-color:#0d47a1; }
+.btn--primary:hover { background:#0b3c88; }
+
+.btn--sm { padding:6px 10px; font-size:.9rem; }
+.btn--danger { background:#c62828; color:#fff; border-color:#b71c1c; }
+.btn--danger:hover { background:#b71c1c; }
+
+.pager { display:flex; justify-content:center; gap:12px; align-items:center; margin-top:14px; }
+.pager-link { color:#0d47a1; text-decoration:none; }
+.pager-link:hover { text-decoration:underline; }
+.pager-disabled { color:#90a4ae; }
+.pager-current { font-weight:700; }
+
+.admin-footer-nav {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end; /* PCは右寄せ */
+}
+@media (max-width: 640px) {
+  .admin-footer-nav { justify-content: center; } /* スマホは中央寄せ */
+}

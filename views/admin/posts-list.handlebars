@@ -1,0 +1,77 @@
+<section class="admin-container">
+  <header class="admin-header">
+    <h1 class="admin-title">ブログ一覧</h1>
+    <a class="btn" href="/admin/newpost">新規投稿</a>
+  </header>
+
+  {{#if message}}<p class="notice">{{message}}</p>{{/if}}
+  {{#if error}}<p class="error">{{error}}</p>{{/if}}
+
+  {{!-- 検索（管理者のみ表示） --}}
+  {{#if isAdmin}}
+  <form class="search-bar" method="GET" action="/admin/posts-list">
+    <input type="text" name="q" value="{{q}}" placeholder="タイトル・本文・著者名を検索">
+    <button type="submit" class="btn btn--primary">検索</button>
+    {{#if q}}<a href="/admin/posts-list" class="btn">クリア</a>{{/if}}
+  </form>
+  {{/if}}
+
+  <div class="list-card">
+    {{#if posts.length}}
+      <div class="table-wrapper">
+        <table class="post-table">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              {{#if isAdmin}}<th style="width:180px;">著者</th>{{/if}}
+              <th style="width:160px;">作成日</th>
+              <th style="width:160px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each posts}}
+            <tr>
+              <td class="title-cell">
+                <a href="/admin/posts/{{this.id}}/edit" class="title-link">{{this.title}}</a>
+              </td>
+              {{#if ../isAdmin}}<td>{{this.author_name}}</td>{{/if}}
+              <td>{{this.created_at}}</td>
+              <td class="actions">
+                <a class="btn btn--sm" href="/admin/posts/{{this.id}}/edit">編集</a>
+                <form method="POST" action="/admin/posts/{{this.id}}/delete" onsubmit="return confirm('削除しますか？');">
+                  <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                  <button type="submit" class="btn btn--sm btn--danger">削除</button>
+                </form>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{else}}
+      <p class="muted">投稿がまだありません。</p>
+    {{/if}}
+  </div>
+
+  {{!-- ページャ --}}
+  {{#if totalPages}}
+  <nav class="pager">
+    {{#if (gt currentPage 1)}}
+      <a class="pager-link" href="/admin/posts?page={{dec currentPage}}{{#if q}}&q={{q}}{{/if}}">« 前へ</a>
+    {{else}}
+      <span class="pager-disabled">« 前へ</span>
+    {{/if}}
+
+    <span class="pager-current">Page {{currentPage}} / {{totalPages}}</span>
+
+    {{#if (lt currentPage totalPages)}}
+      <a class="pager-link" href="/admin/posts?page={{inc currentPage}}{{#if q}}&q={{q}}{{/if}}">次へ »</a>
+    {{else}}
+      <span class="pager-disabled">次へ »</span>
+    {{/if}}
+  </nav>
+  {{/if}}
+  <div class="admin-footer-nav">
+    <a href="/admin" class="btn btn--menu">メニューへ</a>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+<section class="admin-container">
+  <header class="admin-header">
+    <h1 class="admin-title">お問い合わせ一覧</h1>
+  </header>
+
+  {{#if error}}<p class="error">{{error}}</p>{{/if}}
+
+  <div class="table-wrap">
+    <table class="contact-table">
+      <thead>
+        <tr>
+          <th>受信日時</th>
+          <th>会社名</th>
+          <th>氏名</th>
+          <th>メール</th>
+          <th>IP</th>
+          <th>ステータス</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each contacts}}
+          <tr>
+            <td>{{created_at}}</td>
+            <td>{{company}}</td>
+            <td>{{name}}</td>
+            <td><a href="mailto:{{email}}" class="contact-mail">{{email}}</a></td>
+            <td class="ip">{{ip_address}}</td>
+            <td><span class="badge {{statusClass}}">{{statusLabel}}</span></td>
+            <td class="ops">
+              <a class="btn btn--tiny" href="/admin/contacts-content/{{id}}">詳細</a>
+            </td>
+          </tr>
+        {{/each}}
+        {{#unless contacts.length}}
+          <tr><td colspan="10" class="empty">問い合わせはまだありません。</td></tr>
+        {{/unless}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="admin-footer-nav">
+    <a href="/admin" class="btn btn--menu">メニューへ</a>
+  </div>
+</section>

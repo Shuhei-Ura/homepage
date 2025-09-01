@@ -1,0 +1,35 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "express-mysql-session": "^3.0.3",
+    "express-rate-limit": "^8.0.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "mysql2": "^3.14.3",
+    "nodemailer": "^7.0.6",
+    "nodemon": "^3.1.10",
+    "vue": "^3.5.19",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/compiler-sfc": "^3.5.19",
+    "vite": "^7.1.3"
+  }
+}

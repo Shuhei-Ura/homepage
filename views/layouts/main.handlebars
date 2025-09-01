@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/main.js"></script>
+    {{{ descriptions }}}
+    {{{ styles }}}    <!-- ページ専用のCSSをここに挿入できる -->
+    {{{ titles }}}
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="/"><img src="/images/company-logo-removebg-preview.png" alt="株式会社Respoint Okinawaのロゴ"></a>
+            </div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/blog-list">Blog</a></li>
+                        <li><a href="/demo">Demo</a></li>
+                        <li><a href="/recruit">Recruit</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </nav>
+        </div>
+    </header>
+    <!-- スマホ用ヘッダー -->
+    <header class="mobile-header" aria-label="Mobile Navigation">
+
+        <!-- チェックボックスを header 直下へ移動 -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+
+        <div class="mobile-header__inner">
+            <a class="mobile-logo" href="/"><img src="/images/company-logo-removebg-preview.png" alt="株式会社Respoint Okinawaのロゴ"></a>
+            <label class="hamburger" for="nav-toggle" aria-label="メニューを開閉" aria-controls="mobile-nav">
+            <span></span><span></span><span></span>
+            </label>
+        </div>
+
+        <!-- これは header 直下のままでOK（input の“後ろ”にあることが重要） -->
+        <div id="mobile-nav" class="mobile-nav-overlay" role="dialog" aria-modal="true">
+            <label class="overlay-close" for="nav-toggle" aria-label="閉じる"></label>
+              <!-- 右上のCLOSEボタン -->
+            <label class="overlay-close-btn" for="nav-toggle" aria-label="閉じる">CLOSE</label>
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/blog-list">Blog</a></li>
+                    <li><a href="/demo">Demo</a></li>
+                    <li><a href="/recruit">Recruit</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>   
+    {{{body}}}
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/"><img src="/images/company-logo-removebg-preview.png" alt="株式会社Respoint Okinawaのロゴ"></a>
+                <p class="footer-copy">© 2025 Respoint Okinawa</p>
+            </div>
+
+            <nav class="footer-links">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/blog-list">Blog</a></li>
+                    <li><a href="/recruit">Recruit</a></li>
+                    <li><a href="/demo">Demo</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <address class="footer-contact">
+                <p>〒900-0004</p>
+                <p>沖縄県那覇市銘苅２丁目３－１ なは産業支援センターBコア１階</p>
+                <p>E-mail: info@example.jp</p>
+            </address>
+        </div>
+    </footer>
+     {{{ _sections.scripts }}}
+</body>
+
+
+</html>

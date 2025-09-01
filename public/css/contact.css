@@ -1,0 +1,77 @@
+:root{
+  --navy:#1f3556;
+  --orange:#f57c1f;
+  --ink:#1b1f23;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --ok:#16a34a;
+  --ng:#dc2626;
+  --radius:12px;
+}
+
+.contact{padding:48px 16px}
+.contact__container{width:min(900px, 92%); margin-inline:auto}
+.contact__title{
+  margin:0 0 8px;
+  font-size: clamp(22px, 3.2vw, 32px);
+  font-weight:800; color:var(--ink);
+}
+.contact__lead{
+  margin:0 0 24px;
+  color:var(--muted); line-height:1.8;
+}
+.req-note{display:block; font-size:13px; color:#9aa1ab; margin-top:6px}
+
+.contact-form{
+  background:#fff; border:1px solid var(--line);
+  border-radius:16px; padding:22px;
+  box-shadow:0 2px 12px rgba(16,24,40,.04);
+}
+
+.form-field{margin-bottom:18px}
+.form-label{
+  display:block; font-weight:700; color:var(--ink);
+  margin:0 0 6px;
+}
+.req{color:#ef4444; margin-left:4px}
+.form-input, .form-textarea{
+  width:95%; padding:12px 14px;
+  border:1px solid var(--line); border-radius:10px;
+  font-size:16px; color:var(--ink);
+  background:#fff; outline:none;
+}
+.form-input:focus, .form-textarea:focus{
+  border-color:#cbd5e1; box-shadow:0 0 0 3px rgba(31,53,86,.12);
+}
+.form-help{display:block; margin-top:6px; color:#9aa1ab; font-size:12.5px}
+
+/* HTML5 簡易バリデーション時の視覚フィードバック */
+.form-input:required:invalid,
+.form-textarea:required:invalid{
+  border-color:#f3b1b1;
+}
+.form-input:required:valid,
+.form-textarea:required:valid{
+  border-color:#b8e2c5;
+}
+
+.form-actions{margin-top:10px}
+.btn-submit{
+  display:inline-block; padding:12px 22px;
+  border-radius:999px; border:1px solid transparent;
+  background:var(--orange); color:#fff; font-weight:800;
+  cursor:pointer; transition:filter .2s ease;
+}
+.btn-submit:hover{filter:brightness(.95)}
+
+.form-result{
+  margin-top:14px; padding:10px 12px; border-radius:10px; font-size:14px
+}
+.form-result--ok{background:#ecfdf5; color:var(--ok); border:1px solid #a7f3d0}
+.form-result--ng{background:#fef2f2; color:var(--ng); border:1px solid #fecaca}
+
+/* レスポンシブ */
+@media (min-width: 768px){
+  .contact{padding:56px 16px}
+  .contact-form{padding:26px}
+}

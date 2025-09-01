@@ -1,0 +1,28 @@
+.admin-container { max-width:1200px; margin:0 auto; padding:80px 16px; }
+.admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.admin-title { font-size:1.8rem; }
+
+.error { background:#ffebee; color:#b71c1c; padding:10px 12px; border-radius:8px; margin-bottom:12px; }
+
+.post-form { display:grid; gap:14px; }
+.form-group { display:grid; gap:6px; }
+input[type="text"], textarea {
+  width:100%; padding:12px; border:1px solid #cfd8dc; border-radius:10px; font-size:1rem;
+}
+textarea { line-height:1.6; }
+.hint { color:#607d8b; font-size:.9rem; }
+
+.button-row { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { padding:10px 14px; border-radius:10px; border:1px solid #cfd8dc; background:#fff; cursor:pointer; font-weight:700; }
+.btn:hover { background:#eceff1; }
+.btn--primary { background:#0d47a1; color:#fff; border-color:#0d47a1; }
+.btn--primary:hover { background:#0b3c88; }
+
+.admin-footer-nav {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end; /* PCは右寄せ */
+}
+@media (max-width: 640px) {
+  .admin-footer-nav { justify-content: center; } /* スマホは中央寄せ */
+}

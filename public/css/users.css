@@ -1,0 +1,55 @@
+.admin-container { max-width: 1200px; margin: 0 auto; padding: 80px 16px; }
+.admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.admin-title { font-size: 1.8rem; }
+
+.notice { background: #e8f5e9; color: #1b5e20; padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+.error  { background: #ffebee; color: #b71c1c; padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+.muted  { color: #607d8b; }
+
+.user-list-card, .user-form-card {
+  background: #fff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05); margin-bottom: 16px;
+}
+.card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+
+.table-wrapper { overflow-x: auto; }
+.user-table { width: 100%; border-collapse: collapse; }
+.user-table th, .user-table td { padding: 10px 12px; border-bottom: 1px solid #eceff1; text-align: left; }
+.user-table th { background: #f7f9fc; font-weight: 700; }
+.user-table tbody tr:hover { background: #fafafa; }
+
+.user-form { display: grid; gap: 12px; }
+.form-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+.form-group { display: grid; gap: 6px; }
+.form-group input, .form-group select {
+  padding: 10px; border: 1px solid #cfd8dc; border-radius: 8px; font-size: 1rem;
+}
+.hint { color: #607d8b; font-size: .88rem; }
+
+@media (min-width: 640px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) {
+  .form-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.button-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.btn {
+  padding: 10px 14px; border-radius: 10px; border: 1px solid #cfd8dc; background: #fff;
+  cursor: pointer; font-weight: 700; transition: background .2s, box-shadow .2s, transform .05s;
+}
+.btn:hover { background: #eceff1; }
+.btn--primary { background: #0d47a1; color: #fff; border-color: #0d47a1; }
+.btn--primary:hover { background: #0b3c88; }
+.btn--danger { background: #c62828; color: #fff; border-color: #b71c1c; }
+.btn--danger:hover { background: #b71c1c; }
+
+.admin-footer-nav {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end; /* PCは右寄せ */
+}
+
+@media (max-width: 640px) {
+  .admin-footer-nav { justify-content: center; } /* スマホは中央寄せ */
+}

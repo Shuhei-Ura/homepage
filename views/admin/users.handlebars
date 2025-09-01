@@ -1,0 +1,87 @@
+<section class="admin-container">
+  <header class="admin-header">
+    <h1 class="admin-title">社員管理</h1>
+  </header>
+
+  {{#if message}}<p class="notice">{{message}}</p>{{/if}}
+  {{#if error}}<p class="error">{{error}}</p>{{/if}}
+
+  {{!-- 上部：社員一覧 --}}
+  <div class="user-list-card">
+    <h2 class="card-title">社員一覧</h2>
+
+    {{#if users.length}}
+      <div class="table-wrapper">
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th style="width: 120px;">ID</th>
+              <th>社員ID</th>
+              <th>氏名</th>
+              <th style="width: 90px;">権限</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each users}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.employee_id}}</td>
+                <td>{{this.name}}</td>
+                <td>{{#if this.admin}}Admin{{else}}User{{/if}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{else}}
+      <p class="muted">まだ社員が登録されていません。</p>
+    {{/if}}
+  </div>
+
+  {{!-- 下部：登録/更新/削除フォーム（3ボタンはformactionで分岐） --}}
+  <div class="user-form-card">
+    <h2 class="card-title">社員の追加 / 更新 / 削除</h2>
+
+    <form method="POST" class="user-form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="employee_id">社員ID（ログインID）</label>
+          <input id="employee_id" name="employee_id" type="text" required placeholder="例：ura001" autocomplete="username">
+          <small class="hint">※ 削除は社員IDのみ入力でOK</small>
+        </div>
+
+        <div class="form-group">
+          <label for="name">氏名</label>
+          <input id="name" name="name" type="text" placeholder="例：浦 周平" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="password">パスワード</label>
+          <input id="password" name="password" type="password" minlength="8" placeholder="8文字以上を推奨" autocomplete="new-password">
+          <small class="hint">更新時に空欄ならパスワードは変更されません</small>
+        </div>
+
+        <div class="form-group">
+          <label for="admin">権限</label>
+          <select id="admin" name="admin">
+            <option value="0">一般ユーザー</option>
+            <option value="1">管理者</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button type="submit" class="btn btn--primary" formaction="/admin/users">追加</button>
+        <button type="submit" class="btn" formaction="/admin/users/update">更新</button>
+        <button type="submit" class="btn btn--danger"
+                formaction="/admin/users/delete"
+                onclick="return confirm('本当に削除しますか？');">削除</button>
+      </div>
+    </form>
+  </div>
+  <div class="admin-footer-nav">
+    <a href="/admin" class="btn btn--menu">メニューへ</a>
+  </div>
+</section>

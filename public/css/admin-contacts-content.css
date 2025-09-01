@@ -1,0 +1,27 @@
+.admin-container { max-width: 1200px; margin: 40px auto; padding: 80px 16px; }
+.admin-header { margin-bottom: 16px; }
+.admin-title { font-size: 28px; font-weight: 800; }
+.error { background:#ffebee; color:#c62828; border:1px solid #ffcdd2; border-radius:10px; padding:10px 12px; margin:12px 0 16px; }
+
+.contact-card { background:#fff; border:1px solid #eceff1; border-radius:14px; padding:16px; }
+.contact-card .row { display:grid; grid-template-columns: 140px 1fr; gap:12px; padding:10px 0; border-bottom:1px solid #f1f3f5; }
+.contact-card .row:last-child { border-bottom:none; }
+.contact-card .key { color:#78909c; font-weight:700; }
+.contact-card .val { white-space:pre-wrap; word-break:break-word; }
+.contact-card .val.ip { color:#78909c; }
+.contact-card .row-content .content { white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background:#fafafa; border:1px solid #eceff1; border-radius:10px; padding:12px; }
+
+.badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700; border:1px solid transparent; }
+.badge--open { background:#fff3e0; color:#e65100; border-color:#ffe0b2; }
+.badge--progress { background:#e3f2fd; color:#1565c0; border-color:#bbdefb; }
+.badge--done { background:#e8f5e9; color:#2e7d32; border-color:#c8e6c9; }
+
+.status-form { display:flex; gap:8px; align-items:center; margin:16px 0; }
+.status-label { font-weight:700; color:#455a64; }
+.status-select { padding:6px 8px; border:1px solid #cfd8dc; border-radius:8px; background:#fff; }
+
+.detail-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:16px; }
+@media (max-width: 640px) { .detail-actions { justify-content:center; } }
+
+.btn { padding:8px 12px; border:1px solid #cfd8dc; background:#fff; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; }
+.btn:hover { background:#eceff1; }

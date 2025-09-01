@@ -1,0 +1,404 @@
+{{#section "scripts"}}
+  <script src="/js/demo.js"></script>
+{{/section}}
+
+<!--SEO対策のh1 非表示 -->
+<h1 class="sr-only">株式会社Respoint Okinawaの簡易システムデモ｜未経験エンジニアも体験可能</h1>
+
+<section class="demo-hero">
+  <h2 class="demo-hero__title">ようこそ、Demoページへ！</h2>
+  <div class="scroll-indicator">SCROLL</div>
+</section>
+
+<section class="demo-content" aria-labelledby="recruit-demo-title">
+  <h2 class="demo-content__title">
+    このページは、エンジニアの世界をちょっとのぞける体験スペースです！
+  </h2>
+
+  <p class="js-fade-lines">
+    本ホームページは、私、代表・浦が１人で作りました。<br>
+    全てのコードを自ら書き、WordPressなどの簡易化ツールは一切使用していません。<br>
+    私は以前、約半年だけWebシステム開発を手伝った経験がありますが、自分一人で作ったホームページを世に公開したのは今回が初めてです。<br>
+    エンジニアを育成する会社の代表になるにあたり、仲間の成長を支える立場として、「自分自身の手で成果物を完成させる」挑戦を選びました。
+  </p>
+
+  <p class="js-fade-lines">
+    だからこそ伝えたいんです。<br>
+    <strong>「未経験でも、半年やればここまでできる！」</strong>
+  </p>
+
+  <p class="js-fade-lines">
+    私たちの入社カリキュラムも、同じく半年。<br>
+    やりきれば、あなたも自分の手で動くシステムを作れるようになります！
+  </p>
+
+  <p class="js-fade-lines">
+    ここでは HTML・CSS・JavaScriptといった、Webの基本をちょこっと体験できます。<br>
+    クリックしたり文字を打ち込んだりするだけで、「おっ、動いた！」という感覚を味わえるはず。
+  </p>
+
+  <p class="js-fade-lines">
+    その小さな体験が、エンジニアの世界へ踏み出す一歩になるかもしれません。 🚀✨
+  </p>
+</section>
+
+
+<!--HTMLセクション -->
+<section id="html" class="demo-block demo-html" aria-labelledby="html-heading">
+  <h2 id="html-heading" class="demo-content__title">タグでページができる！HTMLの世界</h2>
+  <p class="lead">
+    HTMLとは簡単にいうと、Webページの<strong>「骨組み」</strong>です。<br>
+    実は、あなたが今まで見てきた入力欄やボタン、リンクなども全部HTMLが作っています。
+  </p>
+  <p class="lead">
+    ここで紹介しているサンプルは、実際にクリックして操作できます。
+  </p> 
+
+  <div class="html-grid">
+    <!-- p -->
+    <article class="html-card">
+      <h3><code>&lt;p&gt;</code> <br>段落（paragraph）</h3>
+      <p class="sample-paragraph">
+        これは段落の見本です。文章を段落として区切ることで、読みやすいページになります。
+      </p>
+    </article>
+
+    <!-- input:text -->
+    <article class="html-card">
+      <h3><code>&lt;input&gt;</code> <br>入力欄</h3>
+      <label for="sample-input" class="label">お名前</label>
+      <input id="sample-input" type="text" placeholder="山田 太郎">
+    </article>
+
+    <!-- select -->
+    <article class="html-card">
+      <h3><code>&lt;select&gt;</code> <br>セレクト</h3>
+      <label for="sample-select" class="label">好きな言語</label>
+      <select id="sample-select">
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JavaScript</option>
+      </select>
+    </article>
+
+    <!-- radio -->
+    <article class="html-card">
+      <h3><code>&lt;input type="radio"&gt;</code> <br>ラジオボタン</h3>
+      <fieldset class="choice-group">
+        <legend class="sr-only">職種</legend>
+        <label><input type="radio" name="role" value="dev" checked> エンジニア</label>
+        <label><input type="radio" name="role" value="sales"> セールス</label>
+        <label><input type="radio" name="role" value="design"> デザイナー</label>
+      </fieldset>
+    </article>
+
+    <!-- checkbox -->
+    <article class="html-card">
+      <h3><code>&lt;input type="checkbox"&gt;</code> <br>チェックボックス</h3>
+      <div class="choice-group">
+        <label class="checkbox"><input type="checkbox" checked> メールを受け取る</label>
+        <label class="checkbox"><input type="checkbox"> 利用規約に同意する</label>
+      </div>
+    </article>
+
+    <!-- button -->
+    <article class="html-card">
+      <h3><code>&lt;button&gt;</code> <br>ボタン</h3>
+      <div class="btn-row">
+        <button class="btn">送信</button>
+        <button class="btn outline" type="button">キャンセル</button>
+      </div>
+    </article>
+
+    <!-- a -->
+    <article class="html-card">
+      <h3><code>&lt;a&gt;</code> <br>リンク</h3>
+      <a class="link" href="#" aria-label="ダミーリンク">ページのトップへ</a>
+    </article>
+  </div>
+  <p class="lead">
+    他にも多くの種類があり、HTMLは＜ ＞で囲んだ“タグ”を使って、ページのパーツを生み出す仕組みです。<br>
+  </p>
+  <p class="lead">
+    ここで紹介している7つのパーツが、実際にどんなコードでできているのかをのぞいてみましょう！<br>
+    タグの形と見た目の関係を知るのが、HTMLを理解する第一歩です。
+  </p>
+
+    <div class="html-tag-viewer">
+    <label for="tagPicker" class="label">タグを選んでみよう</label>
+    <select id="tagPicker" class="tag-picker">
+        <option value="p">&lt;p&gt;（段落）</option>
+        <option value="input">&lt;input type="text"&gt;（入力欄）</option>
+        <option value="select">&lt;select&gt;（セレクト）</option>
+        <option value="radio">&lt;input type="radio"&gt;（ラジオ）</option>
+        <option value="checkbox">&lt;input type="checkbox"&gt;（チェックボックス）</option>
+        <option value="button">&lt;button&gt;（ボタン）</option>
+        <option value="a">&lt;a&gt;（リンク）</option>
+    </select>
+
+    <div class="tag-output">
+        <div class="tag-output__title">タグ例</div>
+        <pre class="tag-output__code"><code id="tagCode"></code></pre>
+    </div>
+    </div>
+</div>
+</section>
+
+<section id="css" class="demo-block demo-css" aria-labelledby="css-heading">
+  <h2 id="css-heading" class="demo-content__title">色や形を変えてみよう！CSSの世界</h2>
+  <p class="lead">
+    CSSは簡単にいうと、Webページの<strong>「デザイン」</strong>です。<br>
+    HTMLで作ったパーツの文字色やサイズ、背景色などを変化させます。
+  </p>
+
+  <div class="css-grid">
+    <!-- 0) デフォルト -->
+    <article class="html-card">
+      <h3>デフォルト（基準）</h3>
+      <div class="btn-row">
+        <button class="btn">送信</button>
+      </div>
+      <p class="hint">この見た目を基準に、各プロパティだけを極端に変えます。</p>
+    </article>
+
+    <!-- 1) color -->
+    <article class="html-card">
+      <h3><code>color</code>（文字色）</h3>
+      <div class="btn-row">
+        <button class="btn btn--color">送信</button>
+      </div>
+      <p class="hint"><code>color: #111827;</code></p>
+    </article>
+
+    <!-- 2) font-size -->
+    <article class="html-card">
+      <h3><code>font-size</code>（文字サイズ）</h3>
+      <div class="btn-row">
+        <button class="btn btn--fontsize">送信</button>
+      </div>
+      <p class="hint"><code>font-size: 24px;</code></p>
+    </article>
+
+    <!-- 3) font-weight -->
+    <article class="html-card">
+      <h3><code>font-weight</code>（文字の太さ）</h3>
+      <div class="btn-row">
+        <button class="btn btn--fontweight">送信</button>
+      </div>
+      <p class="hint"><code>font-weight: 900;</code></p>
+    </article>
+
+    <!-- 4) background-color -->
+    <article class="html-card">
+      <h3><code>background-color</code>（背景色）</h3>
+      <div class="btn-row">
+        <button class="btn btn--bg">送信</button>
+      </div>
+      <p class="hint"><code>background-color: #111827;</code></p>
+    </article>
+
+    <!-- 5) width -->
+    <article class="html-card">
+      <h3><code>width</code>（横幅）</h3>
+      <div class="btn-row">
+        <button class="btn btn--width">送信</button>
+      </div>
+      <p class="hint"><code>width: 100%;</code>（横幅いっぱい）</p>
+    </article>
+
+    <!-- 6) height -->
+    <article class="html-card">
+      <h3><code>height</code>（高さ）</h3>
+      <div class="btn-row">
+        <button class="btn btn--height">送信</button>
+      </div>
+      <p class="hint"><code>height: 56px;</code></p>
+    </article>
+
+    <!-- 7) padding -->
+    <article class="html-card">
+      <h3><code>padding</code>（内側の余白）</h3>
+      <div class="btn-row">
+        <button class="btn btn--padding">送信</button>
+      </div>
+      <p class="hint"><code>padding: 18px 32px;</code></p>
+    </article>
+  </div>
+
+  <p class="lead">
+    CSSで変更できる見た目も多くの種類があります。
+  </p>
+
+    <div class="css-play">
+        <h3>自分で数値を入れて、ボタンの見た目を変えてみよう</h3>
+
+        <div class="css-play-grid">
+            <!-- 左：コントロール -->
+            <form id="cssControls" class="css-controls">
+            <div class="field">
+                <label for="w">width（横幅）</label>
+                <div class="unit-wrap">
+                <input id="w" name="width" type="number" min="0" step="1" value="200" inputmode="numeric">
+                <span class="unit">px</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="h">height（高さ）</label>
+                <div class="unit-wrap">
+                <input id="h" name="height" type="number" min="0" step="1" value="44" inputmode="numeric">
+                <span class="unit">px</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="bg">background-color（背景色）</label>
+                <input id="bg" name="backgroundColor" type="color" value="#ff7a1a">
+            </div>
+
+            <div class="field">
+                <label for="tc">color（文字色）</label>
+                <input id="tc" name="color" type="color" value="#ffffff">
+            </div>
+
+            <div class="field">
+                <label for="fs">font-size（文字サイズ）</label>
+                <div class="unit-wrap">
+                <input id="fs" name="fontSize" type="number" min="8" step="1" value="16" inputmode="numeric">
+                <span class="unit">px</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="br">border-radius（角丸）</label>
+                <div class="unit-wrap">
+                <input id="br" name="borderRadius" type="number" min="0" step="1" value="999" inputmode="numeric">
+                <span class="unit">px</span>
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <button type="button" id="resetBtn" class="btn outline">リセット</button>
+            </div>
+            </form>
+
+            <!-- 右：プレビュー -->
+            <div class="css-preview">
+            <div class="preview-header">プレビュー</div>
+            <button id="liveBtn" class="btn">送信</button>
+
+            <div class="style-dump">
+                <div class="style-dump__title">適用中のスタイル</div>
+                <pre class="style-dump__code"><code id="styleCode"></code></pre>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="javascript" class="demo-block demo-js" aria-labelledby="js-heading">
+  <h2 id="js-heading" class="demo-content__title">ページが動き出す！JavaScriptの世界</h2>
+  <p class="lead">
+    JavaScriptは簡単に言うと、Webページの<strong>「動き」</strong>です。<br>
+    ここまでにいくつもの送信ボタンが出てきましたが、押してみましたか？<br>
+    何も起きませんでしたよね。<br>
+    それではまた送信ボタンを準備していますが、これまでとは違います。
+  </p>
+
+  <article class="html-card js-demo">
+    <h3>送信ボタンを押してみよう</h3>
+    <div class="btn-row">
+      <button id="jsAlertBtn" class="btn">送信</button>
+    </div>
+    <p class="hint">このボタンを押すと、アラートが表示されます。</p>
+  </article>
+
+  <p class="lead">
+    HTMLとCSSだけでは、送信ボタンは<strong>「ただそこにあるだけ」</strong>でした。<br>
+    でもJavaScriptを使えば、押したときに反応する“動き”をつけることができます。
+  </p>
+  <p class="lead">
+    このように、JavaScriptはユーザーの操作に合わせてページを動かす仕組みです。<br>
+    クリックしたら色が変わる、文字が出る、画面が切り替わる――<br>
+    そんな“使えるWebページ”を作るために欠かせない存在なんです。
+  </p>
+
+  <h3>身近な JavaScript を体験してみよう</h3>
+
+  <div class="js-lab-grid">
+    <!-- 1) 計算 -->
+    <article class="html-card">
+      <h4>計算：Tシャツ1枚 2,980円</h4>
+      <label class="label" for="qty">個数</label>
+      <input id="qty" type="number" min="0" step="1" value="1" inputmode="numeric">
+      <div class="result-row">
+        合計：<strong id="total">300</strong> 円
+      </div>
+      <p class="hint">個数を入力すると自動で合計を計算します。</p>
+    </article>
+
+    <!-- 2) チェック（カタカナ） -->
+    <article class="html-card">
+      <h4>チェック：カタカナで入力してね</h4>
+      <label class="label" for="kana">フリガナ</label>
+      <input id="kana" type="text" placeholder="ヤマダ タロウ">
+      <p id="kanaMsg" class="msg"></p>
+      <p class="hint">例：カタカナ・スペース・「ー」などはOK、漢字やひらがなはNG</p>
+    </article>
+
+    <!-- 3) カウント（いいね） -->
+    <article class="html-card">
+      <h4>カウント：いいね</h4>
+      <div class="btn-row">
+        <button id="likeBtn" class="btn" type="button">いいね</button>
+        <span class="like-count" aria-live="polite"><span id="likeCount">0</span></span>
+      </div>
+      <p class="hint">ボタンを押すたびに数字が増えます。</p>
+    </article>
+
+    <!-- 4) 一致（パスワード確認） -->
+    <article class="html-card">
+      <h4>一致：パスワード確認</h4>
+      <label class="label" for="pw1">パスワード</label>
+      <input id="pw1" type="password" placeholder="8文字以上推奨">
+      <label class="label" for="pw2">もう一度入力</label>
+      <input id="pw2" type="password">
+      <p id="pwMsg" class="msg"></p>
+      <p class="hint">同じなら「一致」、違うと「不一致」と表示します。</p>
+    </article>
+  </div>
+
+  <p class="lead">
+    入力フォーム、ボタン、チェック機能、そして動きのある画面。<br>
+    当たり前に思っていたことも、実はJavaScriptの力でした！
+  </p>
+</section>
+
+<!--  まとめと求人誘導　-->
+<section id="summary" class="demo-block summary-cta" aria-labelledby="summary-heading">
+  <h2 id="summary-heading" class="demo-content__title">今日の体験を、明日の一歩につなげよう</h2>
+
+  <p class="lead">
+    このDemoページでは、HTMLで骨組みを作り、CSSでデザインを整え、JavaScriptで動きをつける――<br>
+    Webページの基本を少しだけ体験していただきました。
+  </p>
+  <p class="lead">
+    普段当たり前に使っているログイン画面や予約サイトも、実はこうした仕組みが支えています。<br>
+    そして、この仕組みは学べば誰でも身につけられるもの。
+  </p>
+
+  <p class="lead">
+    私たちは、未経験からでも半年で“自分の手で動くシステムを作れる”ようになるカリキュラムを用意しています。<br>
+    あなたもここから、一緒に新しいキャリアを築いてみませんか？
+  </p>
+  <div class="cta-box cta-centered">
+    <a class="cta-btn cta-btn--prime" href="/recruit" aria-label="採用サイト（Recruit）へ">
+        <span class="cta-btn__label">エントリーして、最初の一歩を踏み出す</span>
+        <svg class="cta-btn__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M13 5l7 7-7 7M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+    <p class="cta-caption">採用サイト（Recruit）へ移動します</p>
+  </div>
+</section>
+

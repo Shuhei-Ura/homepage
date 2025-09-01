@@ -1,0 +1,20 @@
+<section class="blogdetail-container">
+  <article class="blogdetail-article">
+    <header class="blogdetail-header">
+      <h1 class="blogdetail-title">{{post.title}}</h1>
+      <div class="blogdetail-meta">
+        <time datetime="{{post.created_at}}" class="date">{{post.created_at}}</time>
+        <span class="author">投稿者：{{post.author_name}}</span>
+        <span class="pill {{roleClass}}">{{roleLabel}}</span>
+      </div>
+    </header>
+
+    <div class="blogdetail-content">
+      {{{post.content}}}
+    </div>
+  </article>
+
+  <div class="blogdetail-footer">
+    <a href="/blog-list" class="btn-back">← 一覧へ戻る</a>
+  </div>
+</section>
