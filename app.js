@@ -1201,6 +1201,6 @@ adminRouter.post("/contact/:id/status", csrfProtection, async (req, res) => {
 
 
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log("サーバー起動中");
 });
