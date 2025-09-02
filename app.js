@@ -63,7 +63,7 @@ app.set('views', './views');
 const dbOptions = {
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "homepage_user",
-  password: process.env.DB_PASS || "Syuuhei2899?",
+  password: process.env.DB_PASS || "GXdpfRYYAc2j6xdnjAUQ",
   database: process.env.DB_NAME || "homepage",
   waitForConnections: true,
   connectionLimit: 10,
@@ -132,9 +132,9 @@ const loginLimiter = rateLimit({
 
 // お問い合わせフォーム用レート制限
 const contactLimitShort = rateLimit({
-  windowMs: 2 * 60 * 1000,   // 1分間
+  windowMs: 2 * 60 * 1000,   // 2分間
   max: 3,                    // 最大3回
-  message: "送信が短時間に集中しています。1分ほど待ってから再送信してください。",
+  message: "送信が短時間に集中しています。2分ほど待ってから再送信してください。",
   standardHeaders: true,
   legacyHeaders: false,
 });

@@ -157,6 +157,7 @@ section.demo-content{ padding: 48px 16px; }
 .js-fade-lines{
     font-size: 16px;
     padding-bottom: 15px;
+    color: #333;
 }
 
 /* 色はサイト側に変数がなければこの値が使われます */
