@@ -432,6 +432,15 @@
   height: auto;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.recruit-income__media img {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.img-caution{
+  font-size: 13px;
+}
 
 
 /* PCレイアウト */

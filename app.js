@@ -272,12 +272,52 @@ app.get("/contact", (req, res) => {
    });
 });
 
-app.get("/demo", (req, res) => {
-   res.render("demo", { 
+app.get("/demo", async (req, res) => {
+  try {
+    // DBから本一覧を取得
+    const [books] = await pool.query(
+      "SELECT id, title, price, date FROM books ORDER BY date DESC"
+    );
+
+    res.render("demo", { 
       styles:'<link rel="stylesheet" href="/css/demo.css">',
       titles:'<title>システムデモ | 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="株式会社Respoint Okinawaの会社概要。沖縄で未経験からエンジニアを育成し、若手が安心して成長できる環境を提供。SES事業を中心に、技術と人材を全国へ展開しています。">'
-   });
+      descriptions:'<meta name="description" content="株式会社Respoint Okinawaの会社概要。沖縄で未経験からエンジニアを育成し、若手が安心して成長できる環境を提供。SES事業を中心に、技術と人材を全国へ展開しています。">',
+
+      // 本一覧をビューに渡す
+      books
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("DB error");
+  }
+});
+
+//　デモ用のpost
+app.post("/demo", async (req, res) => {
+  const { title, price } = req.body;
+
+  // タイトルのバリデーション
+  if (!title || title.length === 0 || title.length > 30) {
+    return res.status(400).send("タイトルは1〜30文字以内で入力してください");
+  }
+
+  // 価格のバリデーション（整数のみ）
+  if (!price || !/^[0-9]+$/.test(price) || Number(price) <= 0) {
+    return res.status(400).send("価格は正の整数で入力してください");
+  }
+
+  try {
+    await pool.query(
+      "INSERT INTO books (title, price, date) VALUES (?, ?, NOW())",
+      [title, price]
+    );
+    res.redirect("/demo");
+  } catch (err) {
+    console.error("DB insert error:", err.message);
+    res.status(500).send("DB error");
+  }
 });
 
 

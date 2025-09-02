@@ -374,6 +374,86 @@
   </p>
 </section>
 
+<!--  データベースセクション　-->
+<section id="database" class="demo-block demo-db" aria-labelledby="db-heading">
+  <h2 id="db-heading" class="demo-content__title">情報が残る！データベースの世界</h2>
+  <p class="lead">
+    データベースとは簡単に言うと、<strong>「記録」</strong>です。<br>
+    SNSでは文字や写真を投稿すると、他者もあなたの投稿を見ることができますよね？<br>
+    それを可能にしているのは、「入力された情報を覚えている存在」があるからです。
+  </p>
+  <p class="lead">
+    そこで今回、本を登録する簡易システムを用意しました。<br>
+    ※個人情報や大事な情報は決して入力しないでください。
+  </p>
+  <article class="html-card">
+    <h3>本を登録してみよう</h3>
+    {{#if error}}
+      <div class="error-box">
+        {{error}}
+      </div>
+    {{/if}}
+    <form id="bookForm" class="db-form" action="/demo" method="POST">
+      <label class="label" for="title">タイトル（30文字以内）</label>
+      <input id="title" type="text" placeholder="サンプル本" maxlength="30" name="title">
+
+      <label class="label" for="price">価格</label>
+      <input id="price" type="number" placeholder="1200" class="book-price" name="price">円
+
+      <div class="btn-row">
+        <button type="submit" class="btn">登録</button>成功すると1度リロードが起きます。
+      </div>
+    </form>
+    <!-- 本一覧（テーブル風） -->
+    <div class="db-box">
+      <div class="db-head">
+        <span class="db-head__title">ここに保存された本の一覧</span>
+        <span class="db-head__count">{{books.length}}件</span>
+      </div>
+
+      <div class="db-table" role="table" aria-label="登録済みの本一覧">
+        <div class="db-row db-row--head" role="row">
+          <div class="db-cell" role="columnheader">タイトル</div>
+          <div class="db-cell db-cell--right" role="columnheader">価格</div>
+        </div>
+
+        {{#if books.length}}
+          {{#each books}}
+            <div class="db-row" role="row">
+              <div class="db-cell db-title" role="cell" title="{{this.title}}">
+                {{this.title}}
+              </div>
+              <div class="db-cell db-cell--right db-price" role="cell">
+                {{this.price}}円
+              </div>
+            </div>
+          {{/each}}
+        {{else}}
+          <div class="db-empty">まだ登録がありません。</div>
+        {{/if}}
+      </div>
+    </div>
+    <p class="hint">
+      投稿した本の情報はデータベースに保存され、リロードしても残ります。<br>
+      日付が変わると自動でデータは消去されます。
+    </p>
+  </article>
+
+  <p class="lead">
+    あなたが登録した本のタイトルと値段が表示されているのを確認できたでしょうか？<br>
+    これはデータベースに情報が記録され、それを画面に呼び出しているからです。  
+  </p>
+  <p class="lead">
+    ただし、データベース自体には「表示する機能」はありません。 <br>
+    「登録されている本の一覧を出して」と命令している存在が別にいます。
+  </p>
+  <p class="lead">
+    それが<strong>サーバー</strong>です。<br>
+    そのサーバーを動かすために広く使われている言語のひとつが<strong>Java</strong>です。<br>
+    このように、データベースとサーバーが協力してはじめて、情報が画面に表示されます。   
+  </p>
+</section>
+
 <!--  まとめと求人誘導　-->
 <section id="summary" class="demo-block summary-cta" aria-labelledby="summary-heading">
   <h2 id="summary-heading" class="demo-content__title">今日の体験を、明日の一歩につなげよう</h2>

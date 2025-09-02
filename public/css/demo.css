@@ -454,6 +454,95 @@ a.link:focus {
   font-weight: 700;
 }
 
+/* ===== データベースセクション ===== */
+.demo-db{
+    padding: 20px 16px; 
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.book-price{
+  margin-bottom:10px;
+}
+.db-list{
+  padding-bottom:10px;
+}
+
+/* --- DB テーブル風リスト --- */
+.db-box{
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.db-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-bottom: 1px solid #eef2f7;
+  font-weight: 700;
+  color: #1b1f23;
+}
+.db-head__count{
+  font-weight: 800;
+  color: #0c3766;
+}
+
+.db-table{
+  max-height: 260px;          /* 多くなったら内側スクロール */
+  overflow: auto;
+}
+
+.db-row{
+  display: grid;
+  grid-template-columns: 1fr 120px;   /* タイトル / 価格 */
+  gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px solid #f1f5f9;
+}
+.db-row:first-child{ border-top: none; }
+
+.db-row--head{
+  position: sticky; top: 0;
+  background: #f8fafc;
+  z-index: 1;
+  font-weight: 800;
+  color: #334155;
+  border-top: none;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.db-cell{ min-width: 0; }                 /* 省略時の計算用 */
+.db-cell--right{ text-align: right; }
+
+.db-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;               /* 長いタイトルは省略表示 */
+}
+
+.db-price{
+  font-variant-numeric: tabular-nums;    /* 桁が揃って見やすい */
+  font-weight: 700;
+  color: #111827;
+}
+
+.db-empty{
+  padding: 22px 14px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* スマホ：価格列を少し広げる/詰める */
+@media (max-width: 480px){
+  .db-row{ grid-template-columns: 1fr 96px; }
+}
+
+
 /* ===== まとめセクション / CTA ===== */
 .summary-cta { 
     padding: 48px 16px; 
