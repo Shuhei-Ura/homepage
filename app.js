@@ -234,6 +234,7 @@ async function sendThanksToCustomer(email, name) {
 株式会社 Respoint Okinawa`,
   });
 }
+app.use(express.static(path.join(__dirname, "public")));
 
 // 認証チェックやcsrfをadmin専用で付ける
 adminRouter.use(requireLogin, csrfProtection);
@@ -242,8 +243,6 @@ adminRouter.use(requireLogin, csrfProtection);
 app.use("/admin", adminRouter);
 // セキュリティヘッダ設定（helmet）
 app.use(helmet());
-
-app.use(express.static(path.join(__dirname, "public")));
 
 
 // 公開ページのgetとpost
