@@ -224,6 +224,7 @@ ${inq.message || '-'}
 
 管理画面: /admin/contacts-list`;
 
+  console.log('sendInquiryNotification start', { to, subject });
   mailer.sendMail({ from, to, subject, html, text }, (err, info) => {
     if (err) {
       console.error("メール送信エラー:", err);
