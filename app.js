@@ -61,10 +61,10 @@ app.set('views', './views');
 
 // MySQL 接続設定
 const dbOptions = {
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "homepage_user",
-  password: process.env.DB_PASS || "GXdpfRYYAc2j6xdnjAUQ",
-  database: process.env.DB_NAME || "homepage",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
