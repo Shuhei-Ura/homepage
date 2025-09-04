@@ -283,14 +283,6 @@ app.get("/about", (req, res) => {
    });
 });
 
-app.get("/contact", (req, res) => {
-   res.render("contact", { 
-      styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>お問い合わせ | 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="未経験からエンジニアを目指す若手に向けた簡易システムデモ。株式会社Respoint Okinawaの業務イメージを体験でき、SESエンジニアの仕事をリアルに知ることができます。">'
-   });
-});
-
 app.get("/demo", async (req, res) => {
   try {
     // DBから本一覧を取得
@@ -312,6 +304,7 @@ app.get("/demo", async (req, res) => {
     res.status(500).send("DB error");
   }
 });
+
 
 //　デモ用のpost
 app.post("/demo", async (req, res) => {
@@ -345,6 +338,14 @@ app.get("/recruit", (req, res) => {
       styles:'<link rel="stylesheet" href="/css/recruit.css">',
       titles:'<title>採用情報 | 株式会社Respoint Okinawa</title>',
       descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">'
+   });
+});
+
+app.get("/contact", (req, res) => {
+   res.render("contact", { 
+      styles:'<link rel="stylesheet" href="/css/contact.css">',
+      titles:'<title>お問い合わせ | 株式会社Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="未経験からエンジニアを目指す若手に向けた簡易システムデモ。株式会社Respoint Okinawaの業務イメージを体験でき、SESエンジニアの仕事をリアルに知ることができます。">'
    });
 });
 
