@@ -172,9 +172,15 @@ const loginValidation = [
 const mailer = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
-  secure: false,
-  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-  tls: { minVersion: 'TLSv1.2' }          // 念のため
+  secure: false, // 465 じゃないので false
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+  },
+  tls: {
+    rejectUnauthorized: false, // 念のため
+    minVersion: 'TLSv1.2'
+  }
 });
 
 // --- 3) 通知メール送信のユーティリティ ---
