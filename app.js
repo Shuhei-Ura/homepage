@@ -172,7 +172,7 @@ const loginValidation = [
 const mailer = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
-  secure: Number(process.env.SMTP_PORT) === 465, // 465=SSL
+  secure: Number(process.env.SMTP_PORT) === 587, // 465=SSL
   auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
 });
 
