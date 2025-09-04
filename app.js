@@ -224,7 +224,13 @@ ${inq.message || '-'}
 
 管理画面: /admin/contacts-list`;
 
-  await mailer.sendMail({ from, to, subject, html, text });
+  mailer.sendMail({ from, to, subject, html, text }, (err, info) => {
+    if (err) {
+      console.error("メール送信エラー:", err);
+    } else {
+      console.log("メール送信成功:", info.response);
+    }
+  });
 }
 
 // （任意）本人へのサンクスメール
