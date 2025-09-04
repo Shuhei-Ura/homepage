@@ -171,17 +171,14 @@ const loginValidation = [
 // --- 2) Nodemailer トランスポート ---
 const mailer = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false, // 465 じゃないので false
+  port: Number(process.env.SMTP_PORT),  // 465 なら SSL, 587 なら STARTTLS
+  secure: Number(process.env.SMTP_PORT) === 465, // 465 の時だけ true
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
+    pass: process.env.SMTP_PASS,
   },
-  tls: {
-    rejectUnauthorized: false, // 念のため
-    minVersion: 'TLSv1.2'
-  }
 });
+
 
 // 環境変数の確認ログ
 console.log("SMTP_HOST:", process.env.SMTP_HOST);
@@ -195,7 +192,7 @@ async function sendInquiryNotification(inq) {
   const from = `"${fromName}" <${process.env.SMTP_USER}>`;
   const to = process.env.ADMIN_EMAIL;
 
-  const subject = `【問い合わせ通知】${inq.company || ''} / ${inq.name || ''}`;
+  const subject = `[問い合わせ通知] ${inq.company || ''} / ${inq.name || ''}`;
 
   const html = `
     <h3>新しいお問い合わせが届きました</h3>
@@ -206,33 +203,22 @@ async function sendInquiryNotification(inq) {
       <tr><td><b>メール</b></td><td>${inq.email || '-'}</td></tr>
       <tr><td><b>IP</b></td><td>${inq.ip_address || '-'}</td></tr>
       <tr><td><b>内容</b></td><td><pre style="white-space:pre-wrap;">${inq.message || '-'}</pre></td></tr>
-      <tr><td><b>ステータス</b></td><td>未対応(0)</td></tr>
     </table>
-    <p>管理画面：/admin/contacts-list をご確認ください。</p>
-    ${process.env.SITE_BASE_URL ? `<p><a href="${process.env.SITE_BASE_URL}/admin/contacts-list">管理画面を開く</a></p>` : ''}
   `;
 
-  const text =
-`新しいお問い合わせが届きました
-受信日時: ${inq.created_at}
-会社名: ${inq.company || '-'}
-氏名: ${inq.name || '-'}
-メール: ${inq.email || '-'}
-IP: ${inq.ip_address || '-'}
-内容:
-${inq.message || '-'}
+  const text = `
+    新しいお問い合わせが届きました
+    受信日時: ${inq.created_at}
+    会社名: ${inq.company || '-'}
+    氏名: ${inq.name || '-'}
+    メール: ${inq.email || '-'}
+    IP: ${inq.ip_address || '-'}
+    内容: ${inq.message || '-'}
+  `;
 
-管理画面: /admin/contacts-list`;
-
-  console.log('sendInquiryNotification start', { to, subject });
-  mailer.sendMail({ from, to, subject, html, text }, (err, info) => {
-    if (err) {
-      console.error("メール送信エラー:", err);
-    } else {
-      console.log("メール送信成功:", info.response);
-    }
-  });
+  await mailer.sendMail({ from, to, subject, html, text });
 }
+
 
 // （任意）本人へのサンクスメール
 async function sendThanksToCustomer(email, name) {
