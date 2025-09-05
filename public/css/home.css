@@ -217,7 +217,7 @@
   .section-lead__deco--recruot {
     position: absolute;
     left: 50%;
-    bottom: -40%; /* 画像から少しはみ出す */
+    bottom: -90%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
