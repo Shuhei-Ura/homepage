@@ -184,7 +184,7 @@
   .section-lead__deco {
     position: absolute;
     left: 50%;
-    bottom: -10%; /* 画像から少しはみ出す */
+    bottom: -12%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
@@ -217,7 +217,7 @@
 }
 
 @media (max-width: 768px) {
-  .section-lead__deco {
+  .section-lead__deco--recruot {
     position: absolute;
     left: 50%;
     bottom: -40%; /* 画像から少しはみ出す */
