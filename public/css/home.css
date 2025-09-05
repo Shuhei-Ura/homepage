@@ -163,10 +163,7 @@
   background: #d96b1c;       /* 少し濃いオレンジに変化 */
 }
 
-/* 手書き風デコレーション */
-.section-lead {
-  position: relative; /* デコ画像の基準にする */
-}
+figure.section-lead__media { position: relative; }
 
 /* 共通のデコ設定：中央揃え + 下にはみ出し + クリック透過 */
 .lead-deco {
@@ -199,10 +196,6 @@
 @media (min-width: 1024px) {
   .lead-deco { bottom: -8%; width: 64%; }
 }
-
-/* recruitの画像にデコを重ねる */
-.section-lead--recruit .section-lead__media { position: relative; }
-
 
 
 /* ===== 事業紹介セクション ===== */
