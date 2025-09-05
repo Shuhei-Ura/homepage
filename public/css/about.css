@@ -1,7 +1,6 @@
 /* ===== About Hero Title ===== */
 .about-hero {
   position: relative;
-  min-height: clamp(360px, 10vh, 620px); /* Home より少し浅めで差別化 */
   overflow: hidden;
   padding: 80px 16px 0;
 }
