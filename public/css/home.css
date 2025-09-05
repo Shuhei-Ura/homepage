@@ -168,11 +168,9 @@
   position: relative; /* デコ画像の基準にする */
 }
 
+// 手書き共通設定
 .section-lead__deco {
   position: absolute;
-  bottom: -120px;   /* 画像の下に少しはみ出す */
-  right: -100px;    /* 右にずらす */
-  width: 600px;    /* サイズ調整 */
   opacity: 0.8;    /* ほんのり透けさせるとオシャレ */
   pointer-events: none; /* クリック操作を邪魔しない */
     /* 彩度を落とす */
@@ -181,12 +179,19 @@
 }
 
 @media (max-width: 768px) {
-  .section-lead__deco {
-    position: absolute;
+  .section-lead__deco--about {
     left: 50%;
     bottom: -12%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
-    width: 100%; /* スマホで大きすぎないように調整 */
+    width: 90%; /* スマホで大きすぎないように調整 */
+  }
+}
+
+@media (mix-width: 768px) {
+  .section-lead__deco--about {
+    bottom: -120px;   /* 画像の下に少しはみ出す */
+    right: -100px;    /* 右にずらす */
+    width: 600px;    /* サイズ調整 */
   }
 }
 /*ここまでaboutセクション*/
