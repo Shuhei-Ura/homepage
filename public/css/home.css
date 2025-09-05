@@ -184,7 +184,7 @@
   .section-lead__deco {
     position: absolute;
     left: 50%;
-    bottom: -10%; /* 画像から少しはみ出す */
+    bottom: -15%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
@@ -216,6 +216,16 @@
   pointer-events: none;
   filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
   z-index: 2;         /* 画像より前面に */
+}
+
+@media (max-width: 768px) {
+  .section-lead__deco {
+    position: absolute;
+    left: 50%;
+    bottom: -15%; /* 画像から少しはみ出す */
+    transform: translateX(-50%);
+    width: 100%; /* スマホで大きすぎないように調整 */
+  }
 }
 
 
