@@ -184,7 +184,7 @@
   .section-lead__deco {
     position: absolute;
     left: 50%;
-    bottom: -15%; /* 画像から少しはみ出す */
+    bottom: -11%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
@@ -222,7 +222,7 @@
   .section-lead__deco {
     position: absolute;
     left: 50%;
-    bottom: -15%; /* 画像から少しはみ出す */
+    bottom: -40%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
