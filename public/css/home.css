@@ -170,7 +170,7 @@ figure.section-lead__media { position: relative; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -30%;          /* 16:9画像に対して “少し” はみ出す */
+  bottom: -10%;          /* 16:9画像に対して “少し” はみ出す */
   width: 70%;            /* 画像幅に対する比率。必要に応じて調整 */
   height: auto;
   pointer-events: none;
@@ -186,7 +186,7 @@ figure.section-lead__media { position: relative; }
 /* モバイル最適化 */
 @media (max-width: 768px) {
   .lead-deco {
-    bottom: -12%;
+    bottom: -30%;
     width: 88%;
   }
   .lead-deco--recruit { bottom: -16%; }
@@ -194,7 +194,7 @@ figure.section-lead__media { position: relative; }
 
 /* 大きめ画面では控えめに */
 @media (min-width: 1024px) {
-  .lead-deco { bottom: -8%; width: 64%; }
+  .lead-deco { bottom: -30%; width: 64%; }
 }
 
 
