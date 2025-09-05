@@ -200,21 +200,18 @@
     grid-template-areas:
       "image heading"
       "image body";
+    position: absolute;
+    bottom: -120px;      /* 画像から少しはみ出す */
+    left: 0px;         /* 左寄せ */
+    width: 20px;       /* サイズはお好みで */
+    opacity: 0.9;      /* 背景っぽく控えめに */
+    pointer-events: none;
+    filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
+    z-index: 2;   
   }
 }
 /* recruitの画像にデコを重ねる */
 .section-lead--recruit .section-lead__media { position: relative; }
-
-.section-lead__deco--recruit {
-  position: absolute;
-  bottom: -120px;      /* 画像から少しはみ出す */
-  left: 0px;         /* 左寄せ */
-  width: 20px;       /* サイズはお好みで */
-  opacity: 0.9;      /* 背景っぽく控えめに */
-  pointer-events: none;
-  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
-  z-index: 2;         /* 画像より前面に */
-}
 
 @media (max-width: 768px) {
   .section-lead__deco--recruot {
