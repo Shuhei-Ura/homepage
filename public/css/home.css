@@ -168,66 +168,41 @@
   position: relative; /* デコ画像の基準にする */
 }
 
-.section-lead__deco {
+/* 共通のデコ設定：中央揃え + 下にはみ出し + クリック透過 */
+.lead-deco {
   position: absolute;
-  bottom: -120px;   /* 画像の下に少しはみ出す */
-  right: -100px;    /* 右にずらす */
-  width: 600px;    /* サイズ調整 */
-  opacity: 0.8;    /* ほんのり透けさせるとオシャレ */
-  pointer-events: none; /* クリック操作を邪魔しない */
-    /* 彩度を落とす */
-  filter: saturate(60%) brightness(1.1);   /* 彩度を60%にする */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10%;          /* 16:9画像に対して “少し” はみ出す */
+  width: 70%;            /* 画像幅に対する比率。必要に応じて調整 */
+  height: auto;
+  pointer-events: none;
+  opacity: 0.9;
   filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
+  z-index: 2;            /* 画像より前、テキストとは干渉しない */
 }
 
+/* about / recruit で微調整したい場合はモディファイアで */
+.lead-deco--about   { bottom: -12%; width: 72%; }
+.lead-deco--recruit { bottom: -14%; width: 76%; }
 
-
+/* モバイル最適化 */
 @media (max-width: 768px) {
-  .section-lead__deco {
-    position: absolute;
-    left: 50%;
-    bottom: -12%; /* 画像から少しはみ出す */
-    transform: translateX(-50%);
-    width: 100%; /* スマホで大きすぎないように調整 */
+  .lead-deco {
+    bottom: -12%;
+    width: 88%;
   }
+  .lead-deco--recruit { bottom: -16%; }
 }
-/*ここまでaboutセクション*/
 
-/*　recruitセクション*/
-/* Recruit用：PCで「画像 左／テキスト 右」にする */
-@media (min-width: 768px) {
-  .section-lead--recruit {
-    /* aboutは "heading image" / "body image" だったのを左右反転 */
-    grid-template-columns: 1fr 1.1fr;
-    grid-template-areas:
-      "image heading"
-      "image body";
-  }
+/* 大きめ画面では控えめに */
+@media (min-width: 1024px) {
+  .lead-deco { bottom: -8%; width: 64%; }
 }
+
 /* recruitの画像にデコを重ねる */
 .section-lead--recruit .section-lead__media { position: relative; }
 
-
-.section-lead__deco--recruit {
-  position: absolute;
-  bottom: -120px;      /* 画像から少しはみ出す */
-  left: 0px;         /* 左寄せ */
-  width: 20px;       /* サイズはお好みで */
-  opacity: 0.9;      /* 背景っぽく控えめに */
-  pointer-events: none;
-  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
-  z-index: 2;         /* 画像より前面に */
-}
-
-@media (max-width: 768px) {
-  .section-lead__deco--recruot {
-    position: absolute;
-    left: 50%;
-    bottom: -40%; /* 画像から少しはみ出す */
-    transform: translateX(-50%);
-    width: 100%; /* スマホで大きすぎないように調整 */
-  }
-}
 
 
 /* ===== 事業紹介セクション ===== */
