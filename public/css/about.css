@@ -17,7 +17,7 @@
 
 .about-hero__text {
   position: absolute;
-  top: 50%;                  /* 縦中央寄せ */
+  top: 60%;                  /* 縦中央寄せ */
   left: 50%;                 /* 横中央寄せ */
   transform: translate(-50%, -50%);
   text-align: center;
