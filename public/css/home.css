@@ -170,7 +170,7 @@ figure.section-lead__media { position: relative; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -10%;          /* 16:9画像に対して “少し” はみ出す */
+  bottom: -30%;          /* 16:9画像に対して “少し” はみ出す */
   width: 70%;            /* 画像幅に対する比率。必要に応じて調整 */
   height: auto;
   pointer-events: none;
