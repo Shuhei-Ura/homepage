@@ -184,14 +184,12 @@
   .section-lead__deco {
     position: absolute;
     left: 50%;
-    bottom: -11%; /* 画像から少しはみ出す */
+    bottom: -10%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
 }
 /*ここまでaboutセクション*/
-
-
 
 /*　recruitセクション*/
 /* Recruit用：PCで「画像 左／テキスト 右」にする */
