@@ -181,7 +181,7 @@
 }
 
 @media (max-width: 768px) {
-  .section-lead__deco--about {
+  .section-lead__deco {
     position: absolute;
     left: 50%;
     bottom: -12%; /* 画像から少しはみ出す */
@@ -200,6 +200,13 @@
     grid-template-areas:
       "image heading"
       "image body";
+  }
+}
+/* recruitの画像にデコを重ねる */
+.section-lead--recruit .section-lead__media { position: relative; }
+
+
+  .section-lead__deco--recruit {
     position: absolute;
     bottom: -120px;      /* 画像から少しはみ出す */
     left: 0px;         /* 左寄せ */
@@ -207,17 +214,14 @@
     opacity: 0.9;      /* 背景っぽく控えめに */
     pointer-events: none;
     filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
-    z-index: 2;   
+    z-index: 2;         /* 画像より前面に */
   }
-}
-/* recruitの画像にデコを重ねる */
-.section-lead--recruit .section-lead__media { position: relative; }
 
 @media (max-width: 768px) {
   .section-lead__deco--recruot {
     position: absolute;
     left: 50%;
-    bottom: -150%; /* 画像から少しはみ出す */
+    bottom: -40%; /* 画像から少しはみ出す */
     transform: translateX(-50%);
     width: 100%; /* スマホで大きすぎないように調整 */
   }
