@@ -182,10 +182,11 @@
 
 @media (max-width: 768px) {
   .section-lead__deco {
-    width: 600px;
-    bottom: -130px;
-    right: -70px;
-    opacity: 0.8;
+    position: absolute;
+    left: 50%;
+    bottom: -10%; /* 画像から少しはみ出す */
+    transform: translateX(-50%);
+    width: 80%; /* スマホで大きすぎないように調整 */
   }
 }
 /*ここまでaboutセクション*/
@@ -215,16 +216,6 @@
   pointer-events: none;
   filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
   z-index: 2;         /* 画像より前面に */
-}
-
-/* モバイル時は少し小さく＆はみ出し量を控えめに */
-@media (max-width: 768px){
-  .section-lead__deco--recruit{
-    width: 200px;
-    bottom: -140px;
-    left: 0px;
-    opacity: 0.9;
-  }
 }
 
 
