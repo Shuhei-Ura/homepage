@@ -2,7 +2,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const TEMPLATES = {
       p:
-`<p>これは段落の見本です。文章を段落として区切ることで、読みやすいページになります。</p>`,
+`<p>これは段落の見本です。</p>`,
       input:
 `<label>お名前
   <input type="text" placeholder="山田 太郎">
