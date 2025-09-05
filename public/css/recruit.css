@@ -1,7 +1,6 @@
 /* ===== About Hero Title ===== */
 .recruit-hero {
   position: relative;
-  min-height: clamp(360px, 48vh, 620px); /* Home より少し浅めで差別化 */
   overflow: hidden;
   padding: 80px 16px 20px;
 }
@@ -18,7 +17,7 @@
 
 .recruit-hero__text {
   position: absolute;
-  top: 50%;                  /* 縦中央寄せ */
+  top: 60%;                  /* 縦中央寄せ */
   left: 50%;                 /* 横中央寄せ */
   transform: translate(-50%, -50%);
   text-align: center;
