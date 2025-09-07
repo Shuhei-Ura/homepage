@@ -349,6 +349,15 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
         descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
       });
     }
+    // 日本語（ひらがな）が含まれているかチェック
+    if (!/[ぁ-ん]/.test(message)) {
+      return res.status(400).render("contact", {
+        error: "お問い合わせ内容には日本語（ひらがな）を含めてご記入ください。",
+        styles:'<link rel="stylesheet" href="/css/contact.css">',
+        titles:'<title>お問い合わせ| 株式会社Respoint Okinawa</title>',
+        descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
+      });
+    }
     if (email.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).render("contact", {
         error: "正しいメールアドレスを入力してください。",
