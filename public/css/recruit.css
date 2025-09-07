@@ -335,7 +335,7 @@
 }
 
 .service-title{
-  font-size: .98rem;
+  font-size: .79rem;
   line-height: 1.4;
   font-weight: 700;
   color: var(--ink);
@@ -344,7 +344,7 @@
 
 /* 画面幅が狭い時の余白最適化 */
 @media (max-width: 640px){
-  .service-card{ padding: 16px; }
+  .service-card{ padding: 5px; }
   .icon-wrap{ margin-bottom: 10px; }
 }
 
