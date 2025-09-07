@@ -98,7 +98,7 @@ app.use(
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // 本番だけ true
       sameSite: "lax",
-      maxAge: 1000 * 60 * 30 // 30分
+      maxAge: 1000 * 60 * 60 // 60分
     },
   })
 ); 
