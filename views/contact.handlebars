@@ -52,7 +52,7 @@
         <p class="form-result form-result--ok" role="status">送信が完了しました。担当よりご連絡いたします。</p>
       {{/if}}
       {{#if error}}
-        <p class="form-result form-result--ng" role="alert">送信に失敗しました。お手数ですが、もう一度お試しください。</p>
+        <p class="form-result form-result--ng" role="alert">{{error}}</p>
       {{/if}}
     </form>
   </div>
