@@ -256,15 +256,15 @@ app.use(helmet());
 app.get("/", (req, res) => {
    res.render("home", {
       styles:'<link rel="stylesheet" href="/css/home.css">', 
-      titles:'<title>ホーム | 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="沖縄でITエンジニアを目指す未経験の若手を積極採用中！株式会社Respoint Okinawaは充実した研修とサポート体制で、ゼロからITキャリアをスタートできます。採用情報はこちら。">'
+      titles:'<title>沖縄で未経験からエンジニアへ｜ゼロから始めるITキャリア｜Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="Respoint Okinawaは沖縄で未経験からエンジニアに挑戦できる会社です。学習カリキュラムと案件紹介で、ゼロから確実にITキャリアを築けます。">'
    });
 });
 
 app.get("/about", (req, res) => {
    res.render("about", { 
       styles:'<link rel="stylesheet" href="/css/about.css">',
-      titles:'<title>会社概要 | 株式会社Respoint Okinawa</title>',
+      titles:'<title>Respoint Okinawaの会社概要｜未経験から挑戦できるエンジニア育成企業</title>',
       descriptions:'<meta name="description" content="株式会社Respoint Okinawaの会社概要。沖縄で未経験からエンジニアを育成し、若手が安心して成長できる環境を提供。SES事業を中心に、技術と人材を全国へ展開しています。">'
    });
 });
@@ -278,8 +278,8 @@ app.get("/demo", async (req, res) => {
 
     res.render("demo", { 
       styles:'<link rel="stylesheet" href="/css/demo.css">',
-      titles:'<title>システムデモ | 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="株式会社Respoint Okinawaの会社概要。沖縄で未経験からエンジニアを育成し、若手が安心して成長できる環境を提供。SES事業を中心に、技術と人材を全国へ展開しています。">',
+      titles:'<title>エンジニアへの第一歩｜未経験から触れるプログラムの動き｜Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="エンジニアを目指す第一歩。未経験からプログラムの動きを体験し、HTML・CSS・JavaScript・DBの基礎を実際に触れて学べるDemoページです。">',
 
       // 本一覧をビューに渡す
       books
@@ -322,16 +322,16 @@ app.post("/demo", async (req, res) => {
 app.get("/recruit", (req, res) => {
    res.render("recruit", { 
       styles:'<link rel="stylesheet" href="/css/recruit.css">',
-      titles:'<title>採用情報 | 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">'
+      titles:'<title>沖縄のエンジニア求人｜文系・未経験からプログラマーへ｜Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="未経験歓迎の沖縄エンジニア求人。文系出身もOK。体系的なカリキュラムとサポートで、ゼロから安心してプログラマーとしてのキャリアを始められます。">'
    });
 });
 
 app.get("/contact", (req, res) => {
    res.render("contact", { 
       styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>お問い合わせ | 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="未経験からエンジニアを目指す若手に向けた簡易システムデモ。株式会社Respoint Okinawaの業務イメージを体験でき、SESエンジニアの仕事をリアルに知ることができます。">'
+      titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">'
    });
 });
 
@@ -345,8 +345,8 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
       return res.status(400).render("contact", {
         error: "お名前・メールアドレス・内容は必須です。",
         styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>お問い合わせ| 株式会社Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
+        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
       });
     }
     // 日本語（ひらがな）が含まれているかチェック
@@ -354,16 +354,16 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
       return res.status(400).render("contact", {
         error: "お問い合わせ内容には日本語（ひらがな）を含めてご記入ください。",
         styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>お問い合わせ| 株式会社Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
+        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
       });
     }
     if (email.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).render("contact", {
         error: "正しいメールアドレスを入力してください。",
         styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>お問い合わせ| 株式会社Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
+        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
       });
     }
 
@@ -401,8 +401,8 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
     res.render("contact", {
       success: true,
       styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>お問い合わせ| 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
+      titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
     });
   } catch (err) {
     console.error("CONTACT INSERT error:", err);
@@ -410,8 +410,8 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
     res.status(500).render("contact", {
       error: "送信中にエラーが発生しました。時間をおいて再度お試しください。",
       styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>お問い合わせ| 株式会社Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="沖縄でエンジニアを目指す若手未経験者を募集！株式会社Respoint Okinawaは研修制度とキャリア支援が整い、IT業界デビューを全力でサポートします。採用情報をご覧ください。">',
+      titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+      descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
     });
   }
 });
@@ -460,9 +460,9 @@ app.get("/blog-list", async (req, res) => {
     }));
 
     res.render("blog-list", {
-      titles: "<title>ブログ一覧</title>",
+      titles: "<title>未経験からエンジニアへ｜社員の学びと成長のブログ｜Respoint Okinawa</title>",
       styles: '<link rel="stylesheet" href="/css/blog-list.css">',
-      descriptions: '<meta name="description" content="Respoint Okinawaのブログ一覧">',
+      descriptions: '<meta name="description" content="Respoint Okinawaのブログでは、未経験からエンジニアを目指す社員の学びや挑戦を記録。リアルな成長ストーリーを通して、あなたのITキャリアの第一歩を応援します。">',
       adminPosts,
       employeePosts,
       adminCount: adminPosts.length,
