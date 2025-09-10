@@ -35,6 +35,15 @@
         <small id="email-help" class="form-help">ご連絡可能なメールアドレスをご記入ください。</small>
       </div>
 
+      {{!-- 電話番号（任意） --}}
+      <div class="form-field">
+        <label for="tel" class="form-label">電話番号（任意）</label>
+        <input type="tel" id="tel" name="tel" class="form-input"
+               inputmode="tel" autocomplete="tel"
+               placeholder="例）090-1234-5678" aria-describedby="tel-help" pattern="^[0-9+\-\s]{7,20}$">
+        <small id="tel-help" class="form-help">ハイフンあり／なしでも入力できます。</small>
+      </div>
+
       {{!-- 問い合わせ内容（必須） --}}
       <div class="form-field">
         <label for="message" class="form-label">お問い合わせ内容 <span class="req" aria-hidden="true">*</span></label>
