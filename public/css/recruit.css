@@ -330,7 +330,6 @@
   height: 82%;
   object-fit: contain;          /* 透過PNGを綺麗に収める */
   display: block;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,.18));
 }
 
 .service-title{
