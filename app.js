@@ -201,25 +201,27 @@ async function sendInquiryNotification(inq) {
       <tr><td><b>会社名</b></td><td>${inq.company || '-'}</td></tr>
       <tr><td><b>氏名</b></td><td>${inq.name || '-'}</td></tr>
       <tr><td><b>メール</b></td><td>${inq.email || '-'}</td></tr>
-      <tr><td><b>メール</b></td><td>${inq.tel || '-'}</td></tr>
+      <tr><td><b>電話</b></td><td>${inq.tel || '-'}</td></tr>
       <tr><td><b>IP</b></td><td>${inq.ip_address || '-'}</td></tr>
-      <tr><td><b>内容</b></td><td><pre style="white-space:pre-wrap;">${inq.message || '-'}</pre></td></tr>
+      <tr><td><b>内容</b></td><td><pre style="white-space:pre-wrap; margin:0;">${inq.message || '-'}</pre></td></tr>
     </table>
   `;
 
   const text = `
-    新しいお問い合わせが届きました
-    受信日時: ${inq.created_at}
-    会社名: ${inq.company || '-'}
-    氏名: ${inq.name || '-'}
-    メール: ${inq.email || '-'}
-    電話番号: ${inq.tel || '-'}
-    IP: ${inq.ip_address || '-'}
-    内容: ${inq.message || '-'}
-  `;
+新しいお問い合わせが届きました
+受信日時: ${inq.created_at}
+会社名: ${inq.company || '-'}
+氏名: ${inq.name || '-'}
+メール: ${inq.email || '-'}
+電話: ${inq.tel || '-'}
+IP: ${inq.ip_address || '-'}
+内容:
+${inq.message || '-'}
+  `.trim();
 
   await mailer.sendMail({ from, to, subject, html, text });
 }
+
 
 
 // （任意）本人へのサンクスメール
@@ -351,6 +353,7 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
         descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
       });
     }
+
     // 日本語（ひらがな）が含まれているかチェック
     if (!/[ぁ-ん]/.test(message)) {
       return res.status(400).render("contact", {
@@ -360,6 +363,7 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
         descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
       });
     }
+
     if (email.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).render("contact", {
         error: "正しいメールアドレスを入力してください。",
@@ -369,35 +373,44 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
       });
     }
 
+    // tel は任意：入力があれば軽い形式チェック（数字/+/ハイフン/空白 7〜30）
+    let telValue = (tel ?? "").trim();
+    if (telValue && !/^[0-9+\-\s]{7,30}$/.test(telValue)) {
+      return res.status(400).render("contact", {
+        error: "電話番号の形式をご確認ください（数字・+・ハイフン・空白のみ）。",
+        styles:'<link rel="stylesheet" href="/css/contact.css">',
+        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
+      });
+    }
+
     // IPアドレスを取得
     const ipAddress = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-    // --- pool を使ってDBにINSERT ---
+    // --- pool を使ってDBにINSERT（tel列を追加） ---
     await pool.query(
-      `INSERT INTO contact (company, name, email, tel, content, status, created_at, ip_address) 
-       VALUES (?, ?, ?, ?, 0, NOW(), ?)`,
-      [company || "", name.trim(), email.trim(), tel || "", message.trim(), ipAddress]
+      `INSERT INTO contact (company, name, email, tel, content, status, created_at, ip_address)
+       VALUES (?, ?, ?, ?, ?, 0, NOW(), ?)`,
+      [company || "", name.trim(), email.trim(), telValue || "", message.trim(), ipAddress]
     );
 
-        // --- 追加：メール通知を送る（失敗してもUXは崩さない） ---
+    // --- 通知メール（失敗してもUXは崩さない） ---
     const notifyPayload = {
       company: company || "",
       name: name?.trim(),
       email: email?.trim(),
-      tel: tel || "",
+      tel: telValue || "",
       message: message?.trim(),
       ip_address: ipAddress,
       created_at: new Date().toLocaleString(),
     };
 
-    // 通知は待ってもOKですが、UXを優先するなら Promise を投げっぱでも可
     try {
       await sendInquiryNotification(notifyPayload);
-      // 必要なら本人へ自動返信
       await sendThanksToCustomer(email, name);
     } catch (mailErr) {
       console.error("CONTACT mail send error:", mailErr);
-      // ここではエラーを握りつぶし、画面は成功で返す
+      // 画面は成功で返す
     }
 
     // 成功時
@@ -409,7 +422,6 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
     });
   } catch (err) {
     console.error("CONTACT INSERT error:", err);
-
     res.status(500).render("contact", {
       error: "送信中にエラーが発生しました。時間をおいて再度お試しください。",
       styles:'<link rel="stylesheet" href="/css/contact.css">',
@@ -418,6 +430,7 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
     });
   }
 });
+
 
 // 公開用ブログ一覧
 app.get("/blog-list", async (req, res) => {
