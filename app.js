@@ -251,8 +251,38 @@ adminRouter.use(requireLogin, csrfProtection);
 
 // ルーターをマウント
 app.use("/admin", adminRouter);
+
 // セキュリティヘッダ設定（helmet）
-app.use(helmet());
+// Google Maps の iframe が埋め込めるように全体CSPを明示設定
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        "default-src": ["'self'"],
+        // Google マップの <iframe> を許可
+        "frame-src": ["'self'", "https://www.google.com"],
+        // マップ内で読み込まれるスクリプト類（最小限）
+        "script-src": [
+          "'self'",
+          "https://www.google.com",
+          "https://maps.googleapis.com",
+          "https://maps.gstatic.com"
+        ],
+        // 画像（ピン等）と data: を許可
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://www.google.com",
+          "https://maps.gstatic.com",
+          "https://maps.googleapis.com"
+        ],
+        // 既存スタイル + マップ内インラインスタイル許可
+        "style-src": ["'self'", "'unsafe-inline'"]
+      }
+    }
+  })
+);
 
 
 // 公開ページのgetとpost
