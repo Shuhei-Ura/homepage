@@ -319,7 +319,6 @@
   aspect-ratio: 1 / 1;         /* 正方形に統一 */
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: color-mix(in oklab, var(--card), #000 6%);
   display: grid;
   place-items: center;
   overflow: hidden;
