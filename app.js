@@ -201,6 +201,7 @@ async function sendInquiryNotification(inq) {
       <tr><td><b>会社名</b></td><td>${inq.company || '-'}</td></tr>
       <tr><td><b>氏名</b></td><td>${inq.name || '-'}</td></tr>
       <tr><td><b>メール</b></td><td>${inq.email || '-'}</td></tr>
+      <tr><td><b>メール</b></td><td>${inq.tel || '-'}</td></tr>
       <tr><td><b>IP</b></td><td>${inq.ip_address || '-'}</td></tr>
       <tr><td><b>内容</b></td><td><pre style="white-space:pre-wrap;">${inq.message || '-'}</pre></td></tr>
     </table>
@@ -212,6 +213,7 @@ async function sendInquiryNotification(inq) {
     会社名: ${inq.company || '-'}
     氏名: ${inq.name || '-'}
     メール: ${inq.email || '-'}
+    電話番号: ${inq.tel || '-'}
     IP: ${inq.ip_address || '-'}
     内容: ${inq.message || '-'}
   `;
@@ -338,7 +340,7 @@ app.get("/contact", (req, res) => {
 // お問い合わせデータ登録
 app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
   try {
-    const { company, name, email, message } = req.body;
+    const { company, name, email, tel, message } = req.body;
 
     // --- 入力バリデーション（最低限） ---
     if (!name || !email || !message) {
@@ -372,9 +374,9 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
 
     // --- pool を使ってDBにINSERT ---
     await pool.query(
-      `INSERT INTO contact (company, name, email, content, status, created_at, ip_address) 
+      `INSERT INTO contact (company, name, email, tel, content, status, created_at, ip_address) 
        VALUES (?, ?, ?, ?, 0, NOW(), ?)`,
-      [company || "", name.trim(), email.trim(), message.trim(), ipAddress]
+      [company || "", name.trim(), email.trim(), tel || "", message.trim(), ipAddress]
     );
 
         // --- 追加：メール通知を送る（失敗してもUXは崩さない） ---
@@ -382,6 +384,7 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
       company: company || "",
       name: name?.trim(),
       email: email?.trim(),
+      tel: tel || "",
       message: message?.trim(),
       ip_address: ipAddress,
       created_at: new Date().toLocaleString(),
