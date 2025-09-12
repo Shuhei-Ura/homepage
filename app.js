@@ -180,12 +180,6 @@ const mailer = nodemailer.createTransport({
 });
 
 
-// 環境変数の確認ログ
-console.log("SMTP_HOST:", process.env.SMTP_HOST);
-console.log("SMTP_PORT:", process.env.SMTP_PORT);
-console.log("SMTP_USER:", process.env.SMTP_USER);
-
-
 // --- 3) 通知メール送信のユーティリティ ---
 async function sendInquiryNotification(inq) {
   const fromName = process.env.MAIL_FROM_NAME || 'Site Notification';
