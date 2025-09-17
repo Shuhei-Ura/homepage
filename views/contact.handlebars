@@ -8,11 +8,18 @@
 <!--問い合わせフォーム -->
 <section class="contact" aria-labelledby="contact-title">
   <div class="contact__container">
-    <h1 id="contact-title" class="contact__title">お問い合わせ</h1>
+    <h2 id="contact-title" class="contact__title">お問い合わせ</h2>
     <p class="contact__lead">
       採用に関するご相談、サービスに関するご質問など、以下のフォームからお問い合わせください。
       <span class="req-note"><span aria-hidden="true">*</span> は必須項目です。</span>
     </p>
+    {{!-- 成功／エラー表示用の領域（後でサーバ側から埋め込む想定） --}}
+    {{#if success}}
+      <p class="form-result form-result--ok" role="status">送信が完了しました。担当よりご連絡いたします。</p>
+    {{/if}}
+    {{#if error}}
+      <p class="form-result form-result--ng" role="alert">{{error}}</p>
+    {{/if}}
 
     <form class="contact-form" method="post" action="/contact" novalidate>
       {{!-- 会社（任意） --}}
@@ -56,13 +63,6 @@
         </button>
       </div>
 
-      {{!-- 成功／エラー表示用の領域（後でサーバ側から埋め込む想定） --}}
-      {{#if success}}
-        <p class="form-result form-result--ok" role="status">送信が完了しました。担当よりご連絡いたします。</p>
-      {{/if}}
-      {{#if error}}
-        <p class="form-result form-result--ng" role="alert">{{error}}</p>
-      {{/if}}
     </form>
   </div>
 </section>
