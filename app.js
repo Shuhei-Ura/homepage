@@ -1251,10 +1251,14 @@ adminRouter.post("/contact/:id/status", csrfProtection, async (req, res) => {
   }
 });
 
-
-
-
-
+// 404 ページ用ミドルウェア
+app.use((req, res) => {
+  res.status(404).render('404', {
+      styles:'<link rel="stylesheet" href="/css/recruit.css">',
+      titles:'<title>ページが見つかりませんRespoint Okinawa</title>',
+      descriptions:'<meta name="description" content="404ページ">'
+  });
+});
 
 app.listen(port, '127.0.0.1', () => {
   console.log("サーバー起動中");
