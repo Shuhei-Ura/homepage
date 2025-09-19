@@ -95,7 +95,7 @@
 .about-story__media img {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
+  max-height:500px;
   object-fit: cover;
   border-radius: 12px;
   display: block;
