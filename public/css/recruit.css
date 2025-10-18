@@ -526,3 +526,67 @@
   font-size: 13px;
   color: #6b7280;
 }
+
+/* 募集要項（会社概要と同トーン） */
+.recruit-terms { padding:48px 16px; }
+.recruit-terms__container { max-width:1200px; margin:0 auto; }
+.recruit-terms__title{
+  margin:0 0 12px;
+  font-size:22px; font-weight:800; color:#1b1f23;
+}
+.recruit-terms__title::after{
+  content:"";
+  display:block; width:56px; height:3px; margin-top:8px;
+  border-radius:999px; background:#f57c1f;
+}
+
+/* カード */
+.job-card{
+  margin-top:18px; padding:18px 16px;
+  border:1px solid #e5e7eb; border-radius:12px; background:#fff;
+  box-shadow:0 2px 12px rgba(16,24,40,.04);
+}
+.job-card__header{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.job-card__title{ margin:0; font-size:18px; font-weight:800; color:#1f3556; }
+.job-card__tag{
+  font-size:12px; font-weight:700; color:#1f3556; background:#eef2f7;
+  padding:2px 8px; border-radius:999px; border:1px solid #dbe2ea;
+}
+
+/* 表風の定義リスト */
+.terms-table{
+  margin:8px 0 0; padding:0;
+  border:1px solid #e5e7eb; border-radius:12px;
+  overflow:hidden; background:#fff;
+}
+.terms-row{
+  display:grid; gap:16px;
+  grid-template-columns:200px 1fr;
+  padding:14px 16px;
+  border-top:1px solid #e5e7eb; align-items:start;
+}
+.terms-row:first-child{ border-top:none }
+.terms-row dt{ margin:0; font-weight:700; color:#1f3556; }
+.terms-row dd{ margin:0; color:#333; line-height:1.85; }
+.terms-row:nth-child(odd){ background:#fafbfc; }
+
+/* 箇条書き */
+.terms-list{ margin:0; padding-left:1.2em; }
+.terms-list li{ margin:0.1em 0; }
+
+/* CTA */
+.job-card__footer{ margin-top:14px; display:flex; justify-content:flex-end; }
+.btn-primary{
+  display:inline-block; padding:10px 16px; border-radius:10px;
+  background:#f57c1f; color:#fff; font-weight:700; text-decoration:none;
+  border:1px solid #ee6f0f; box-shadow:0 1px 6px rgba(245,124,31,.25);
+}
+.btn-primary:hover{ opacity:.9; }
+
+/* レスポンシブ */
+@media (max-width:640px){
+  .recruit-terms__title{ font-size:20px; }
+  .job-card{ padding:14px 12px; }
+  .terms-row{ grid-template-columns:1fr; padding:12px 14px; }
+  .terms-row dt{ color:#475569; font-size:13px; }
+}
