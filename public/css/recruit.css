@@ -241,6 +241,10 @@
 .step:nth-child(3) .step__num { background: #0ea5e9; }
 .step:nth-child(4) .step__num { background: #16a34a; }
 
+.curriculum p{
+  color:#333;
+}
+
 /* ===== 使用言語セクション ===== */
 .recruit-tech {
   max-width: 1200px;
