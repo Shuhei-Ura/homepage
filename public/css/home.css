@@ -337,3 +337,24 @@ figure.section-lead__media { position: relative; }
   .cta-banner__inner{ grid-template-columns: 1fr; text-align:center }
   .cta-banner__actions{ justify-content:center }
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+  will-change: opacity, transform;
+}
+
+/* 画面に入ったら表示 */
+.reveal.is-inview {
+  opacity: 1;
+  transform: none;
+}
+
+/* アニメ控えめ設定に配慮 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    transform: none;
+  }
+}
