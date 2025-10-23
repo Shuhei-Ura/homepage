@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     root: null,
     // 下 10% ほど余裕を持って少し早めに発火
     rootMargin: '0px 0px -10% 0px',
-    threshold: 0.3
+    threshold: 0.25
   });
 
   sections.forEach(sec => io.observe(sec));
