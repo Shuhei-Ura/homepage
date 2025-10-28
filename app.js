@@ -409,7 +409,24 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
     }
 
     // IPアドレスを取得
-    const ipAddress = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    function getClientIp(req) {
+      // Cloudflare配下（使ってるならほぼ確実）→ これが一番信頼性が高い
+      if (req.headers['cf-connecting-ip']) {
+        return req.headers['cf-connecting-ip'];
+      }
+
+      // x-forwarded-for に複数並んでいる場合は、先頭が「元のクライアントIP」
+      const xff = req.headers['x-forwarded-for'];
+      if (xff) {
+        return xff.split(',')[0].trim();
+      }
+
+      // 最後の手段
+      return (req.socket?.remoteAddress || '').replace('::ffff:', '');
+    }
+
+    // これに置き換える
+    const ipAddress = getClientIp(req).slice(0, 45);
 
     // --- pool を使ってDBにINSERT（tel列を追加） ---
     await pool.query(
