@@ -57,7 +57,7 @@
   {{#if totalPages}}
   <nav class="pager">
     {{#if (gt currentPage 1)}}
-      <a class="pager-link" href="/admin/posts?page={{dec currentPage}}{{#if q}}&q={{q}}{{/if}}">« 前へ</a>
+      <a class="pager-link" href="/admin/posts-list?page={{dec currentPage}}{{#if q}}&q={{q}}{{/if}}">« 前へ</a>
     {{else}}
       <span class="pager-disabled">« 前へ</span>
     {{/if}}
