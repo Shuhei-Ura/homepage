@@ -65,7 +65,7 @@
     <span class="pager-current">Page {{currentPage}} / {{totalPages}}</span>
 
     {{#if (lt currentPage totalPages)}}
-      <a class="pager-link" href="/admin/posts?page={{inc currentPage}}{{#if q}}&q={{q}}{{/if}}">次へ »</a>
+      <a class="pager-link" href="/admin/posts-list?page={{inc currentPage}}{{#if q}}&q={{q}}{{/if}}">次へ »</a>
     {{else}}
       <span class="pager-disabled">次へ »</span>
     {{/if}}
