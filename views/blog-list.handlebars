@@ -44,32 +44,4 @@
       {{/each}}
     </ul>
   </section>
-
-  <!-- 社員投稿 -->
-  <section class="hlist-block">
-    <div class="hlist-head">
-      <h2 class="hlist-heading">社員たちの学びや成長の記録</h2>
-      <!-- 後でJSで有効化するためのボタン（今は装飾だけ） -->
-      <div class="hlist-arrows" aria-hidden="true">
-        <button class="hlist-arrow is-left" type="button" disabled>‹</button>
-        <button class="hlist-arrow is-right" type="button" disabled>›</button>
-      </div>
-    </div>
-
-    <ul class="cards-row" id="employee-row" tabindex="0">
-      {{#each employeePosts}}
-      <li class="card">
-        <a class="card-link" href="/blog/{{this.id}}">
-          <div class="card-meta">
-            <time class="date" datetime="{{this.created_at}}">{{this.created_at}}</time>
-            <span class="author">{{this.author_name}}</span>
-            <span class="pill pill-emp">社員投稿</span>
-          </div>
-          <h3 class="card-title">{{this.title}}</h3>
-          <p class="card-excerpt">{{this.excerpt}}</p>
-        </a>
-      </li>
-      {{/each}}
-    </ul>
-  </section>
 </section>
