@@ -1,7 +1,8 @@
 /* トップページ（LP） */
 /* ===== HERO ===== */
 .hero{padding-top:110px;position:relative;overflow:hidden}
-.strip{display:flex;gap:28px;width:max-content;animation:strip 60s linear infinite}
+.strip{display:flex;gap:28px;padding-right:28px;width:max-content;animation:strip3 50s linear infinite}
+@keyframes strip3{to{transform:translateX(calc(-100% / 3))}}
 .strip:hover{animation-play-state:paused}
 @keyframes strip{to{transform:translateX(-50%)}}
 .strip figure{margin:0;width:340px;height:400px;flex:none;position:relative}
@@ -12,6 +13,11 @@
 .term .p{color:var(--orange)}
 .term .c{color:#7d93bd}
 .term .ok{color:#7fe0a8}
+/* カリキュラム画面のカード：左上（メニュー部分）を見せる */
+.strip .shot{width:100%;height:100%;background:#fff;display:flex;flex-direction:column}
+.shot .bar{flex:none;display:flex;gap:6px;padding:12px 14px;background:var(--navy-pale)}
+.shot .bar i{width:10px;height:10px;border-radius:50%;background:#b9c6de}
+.strip .shot img{flex:1;min-height:0;object-fit:cover;object-position:left top}
 .hero__mark{position:absolute;right:-60px;bottom:-40px;width:420px;height:540px;background:url(/images/company-logo-removebg-preview.png) no-repeat;background-size:2100px;background-position:-250px -720px;opacity:.07;pointer-events:none}
 .hero__copy{position:relative;padding-top:40px;padding-bottom:110px}
 .nw{white-space:nowrap}
