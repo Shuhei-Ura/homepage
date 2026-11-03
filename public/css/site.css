@@ -65,7 +65,7 @@ body.menu-open .drawer{opacity:1;visibility:visible}
 .ja-sub{font-weight:700;font-size:14px;color:var(--muted);margin:14px 0 0;display:flex;align-items:center;gap:10px}
 .ja-sub::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
 .h2{font-size:clamp(24px,3.2vw,38px);font-weight:900;line-height:1.5;margin:0}
-.lead{color:var(--muted);font-size:15px}
+.lead{color:var(--muted);font-size:17px}
 
 /* reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
