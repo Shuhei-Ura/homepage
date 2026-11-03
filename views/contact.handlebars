@@ -1,69 +1,85 @@
 {{#section "scripts"}}
-  <script src="/js/content.js"></script>
+  <script src="/js/contact.js"></script>
 {{/section}}
 
-<!--SEO対策のh1 非表示 -->
-<h1 class="sr-only">採用エントリー・お問い合わせ｜Respoint Okinawa</h1>
-
-<!--問い合わせフォーム -->
-<section class="contact" aria-labelledby="contact-title">
-  <div class="contact__container">
-    <h2 id="contact-title" class="contact__title">お問い合わせ</h2>
-    <p class="contact__lead">
-      採用に関するご相談、サービスに関するご質問など、以下のフォームからお問い合わせください。
-      <span class="req-note"><span aria-hidden="true">*</span> は必須項目です。</span>
-    </p>
-    {{!-- 成功／エラー表示用の領域（後でサーバ側から埋め込む想定） --}}
-    {{#if success}}
-      <p class="form-result form-result--ok" role="status">送信が完了しました。担当よりご連絡いたします。</p>
-    {{/if}}
-    {{#if error}}
-      <p class="form-result form-result--ng" role="alert">{{error}}</p>
-    {{/if}}
-
-    <form class="contact-form" method="post" action="/contact" novalidate>
-      {{!-- 会社（任意） --}}
-      <div class="form-field">
-        <label for="company" class="form-label">会社名（任意）</label>
-        <input type="text" id="company" name="company" class="form-input" autocomplete="organization" placeholder="例）株式会社Respoint Okinawa">
-      </div>
-
-      {{!-- 名前（必須） --}}
-      <div class="form-field">
-        <label for="name" class="form-label">お名前 <span class="req" aria-hidden="true">*</span></label>
-        <input type="text" id="name" name="name" class="form-input" required autocomplete="name" placeholder="例）山田 太郎" aria-describedby="name-help">
-        <small id="name-help" class="form-help">本名または担当者名をご記入ください。</small>
-      </div>
-
-      {{!-- メール（必須） --}}
-      <div class="form-field">
-        <label for="email" class="form-label">メールアドレス <span class="req" aria-hidden="true">*</span></label>
-        <input type="email" id="email" name="email" class="form-input" required inputmode="email" autocomplete="email" placeholder="例）taro@example.com" aria-describedby="email-help">
-        <small id="email-help" class="form-help">ご連絡可能なメールアドレスをご記入ください。</small>
-      </div>
-
-      {{!-- 電話番号（任意） --}}
-      <div class="form-field">
-        <label for="tel" class="form-label">電話番号（任意）</label>
-        <input type="tel" id="tel" name="tel" class="form-input"
-               inputmode="tel" autocomplete="tel"
-               placeholder="例）090-1234-5678" aria-describedby="tel-help" pattern="^[0-9+\-\s]{7,20}$">
-        <small id="tel-help" class="form-help">ハイフンあり／なしでも入力できます。</small>
-      </div>
-
-      {{!-- 問い合わせ内容（必須） --}}
-      <div class="form-field">
-        <label for="message" class="form-label">お問い合わせ内容 <span class="req" aria-hidden="true">*</span></label>
-        <textarea id="message" name="message" class="form-textarea" rows="8" required placeholder="ご質問・ご相談の内容をご記入ください。"></textarea>
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" class="btn-submit">
-          送信する
-        </button>
-      </div>
-
-    </form>
+<section class="head">
+  <div class="container">
+    <p class="crumb"><a href="/">トップ</a> ／ お問い合わせ</p>
+    <h1 class="en-title">Contact<span class="sun"></span></h1>
+    <p class="ja-sub">採用エントリー・お問い合わせ</p>
+    <p class="lead">「話を聞いてみたい」だけでも大歓迎です。今の思いや不安なこと、気軽に聞かせてください。法人のお客様からのご相談もこちらから受け付けています。</p>
   </div>
 </section>
 
+<div class="container wrap">
+  <!-- 左：面談までの流れ -->
+  <aside class="side">
+    <h2>まずは、気軽に<br>面談から。</h2>
+    <p>私たちは“面談”という形で、ざっくばらんにお話しすることから始めています。</p>
+    <ol class="flow">
+      <li><b>01</b><strong>フォームを送信</strong><span>「話を聞いてみたい」の一言でもOK。</span></li>
+      <li><b>02</b><strong>担当からご連絡</strong><span>ご入力のメールアドレスに、日程調整のご連絡をします。</span></li>
+      <li><b>03</b><strong>面談</strong><span>仕事内容や研修のこと、なんでも聞いてください。</span></li>
+    </ol>
+    <div class="contact-info">
+      <strong>株式会社Respoint Okinawa</strong>
+      〒900-0004 沖縄県那覇市銘苅2丁目3-1<br>なは産業支援センターBコア1階<br>
+      ゆいレール古島駅から徒歩11分
+    </div>
+  </aside>
+
+  <!-- 右：フォーム -->
+  <div class="card">
+    {{#if success}}
+      <p class="result result--ok" role="status"><i>✓</i>送信が完了しました。担当よりご連絡いたします。</p>
+    {{/if}}
+    {{#if error}}
+      <p class="result result--ng" role="alert"><i>!</i><span>{{error}}</span></p>
+    {{/if}}
+
+    <form method="post" action="/contact" novalidate id="contactForm">
+      <div class="purpose" role="radiogroup" aria-label="ご用件">
+        <input type="radio" name="purpose" id="p-recruit" value="recruit"{{#unless (eq form.purpose "business")}} checked{{/unless}}>
+        <label for="p-recruit"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><span><strong>採用について話を聞きたい</strong><small>面談・エントリー</small></span></label>
+        <input type="radio" name="purpose" id="p-biz" value="business"{{#if (eq form.purpose "business")}} checked{{/if}}>
+        <label for="p-biz"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></span><span><strong>法人のご相談</strong><small>システム開発・Zoho導入など</small></span></label>
+      </div>
+
+      <div class="field" id="f-company"{{#unless (eq form.purpose "business")}} hidden{{/unless}}>
+        <label class="label" for="company">会社名 <span class="tag tag--opt">任意</span></label>
+        <input class="input" type="text" id="company" name="company" value="{{form.company}}" autocomplete="organization" placeholder="例）株式会社Respoint Okinawa">
+      </div>
+
+      <div class="field" id="f-name">
+        <label class="label" for="name">お名前 <span class="tag tag--req">必須</span></label>
+        <input class="input" type="text" id="name" name="name" value="{{form.name}}" required autocomplete="name" placeholder="例）山田 太郎">
+        <span class="err">お名前を入力してください。</span>
+      </div>
+
+      <div class="row2">
+        <div class="field" id="f-email">
+          <label class="label" for="email">メールアドレス <span class="tag tag--req">必須</span></label>
+          <input class="input" type="email" id="email" name="email" value="{{form.email}}" required inputmode="email" autocomplete="email" placeholder="例）taro@example.com">
+          <span class="err">正しいメールアドレスを入力してください。</span>
+        </div>
+        <div class="field" id="f-tel">
+          <label class="label" for="tel">電話番号 <span class="tag tag--req">必須</span></label>
+          <input class="input" type="tel" id="tel" name="tel" value="{{form.tel}}" required inputmode="tel" autocomplete="tel" placeholder="例）090-1234-5678" pattern="^[0-9+\-\s]{7,30}$">
+          <span class="help">ハイフンあり／なし、どちらでもOKです。</span>
+          <span class="err">電話番号を入力してください（数字・ハイフンのみ）。</span>
+        </div>
+      </div>
+
+      <div class="field" id="f-message">
+        <label class="label" for="message"><span id="msgLabel">聞いてみたいこと・今の思い</span> <span class="tag tag--req">必須</span></label>
+        <textarea class="textarea" id="message" name="message" required placeholder="例）未経験ですが、研修の進め方について詳しく聞いてみたいです。">{{form.message}}</textarea>
+        <span class="err">内容を入力してください。</span>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn--o">送信する <span class="arrow">→</span></button>
+        <p>送信後、担当よりメールでご連絡します。</p>
+      </div>
+    </form>
+  </div>
+</div>

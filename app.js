@@ -48,6 +48,9 @@ app.engine('handlebars', engine({
     dec: (v) => Number(v) - 1,
     gt:  (a, b) => Number(a) > Number(b),
     lt:  (a, b) => Number(a) < Number(b),
+    eq:  (a, b) => a === b,
+    // 最後の引数は Handlebars の options なので除外する
+    or:  (...args) => args.slice(0, -1).some(Boolean),
 
     // ← 追加：ページ側から差し込める「セクション」ヘルパー
     section(name, options) {
@@ -273,7 +276,9 @@ app.use(
           "https://maps.googleapis.com"
         ],
         // 既存スタイル + マップ内インラインスタイル許可
-        "style-src": ["'self'", "'unsafe-inline'"]
+        "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        // 公開ページの Web フォント（Google Fonts）
+        "font-src": ["'self'", "https://fonts.gstatic.com", "data:"]
       }
     }
   })
@@ -282,132 +287,140 @@ app.use(
 
 // 公開ページのgetとpost
 
-app.get("/", (req, res) => {
-   res.render("home", {
-      styles:'<link rel="stylesheet" href="/css/home.css">', 
-      titles:'<title>沖縄で未経験からエンジニアへ｜ゼロから始めるITキャリア｜Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="Respoint Okinawaは沖縄で未経験からエンジニアに挑戦できる会社です。学習カリキュラムと案件紹介で、ゼロから確実にITキャリアを築けます。">'
-   });
-});
+// 公開ページは新デザインのレイアウト（views/layouts/site.handlebars）を使う
+const SITE_LAYOUT = "site";
 
-app.get("/about", (req, res) => {
-   res.render("about", { 
-      styles:'<link rel="stylesheet" href="/css/about.css">',
-      titles:'<title>Respoint Okinawaの会社概要｜未経験から挑戦できるエンジニア育成企業</title>',
-      descriptions:'<meta name="description" content="株式会社Respoint Okinawaの会社概要。沖縄で未経験からエンジニアを育成し、若手が安心して成長できる環境を提供。SES事業を中心に、技術と人材を全国へ展開しています。">'
-   });
-});
+// titles / descriptions は {{{ }}} で埋め込むので、DB由来の文字列はエスケープしてから渡す
+const escapeHtml = (value) =>
+  String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-app.get("/demo", async (req, res) => {
+// 404・エラーページ
+const NOT_FOUND_PAGE = {
+  layout: SITE_LAYOUT,
+  styles: '<link rel="stylesheet" href="/css/404.css">',
+  titles: '<title>ページが見つかりません｜Respoint Okinawa</title>',
+  descriptions: '<meta name="description" content="404ページ">',
+};
+function render404(res) {
+  return res.status(404).render("404", NOT_FOUND_PAGE);
+}
+
+// ブログ：公開するのは経営者投稿（admin = 1）だけ
+const BLOG_DATE_COLUMNS = `
+  DATE_FORMAT(b.created_at, '%Y.%m.%d') AS created_at,
+  DATE_FORMAT(b.created_at, '%Y-%m-%d') AS created_at_iso`;
+
+async function fetchAdminPosts(offset, limit) {
+  // 1件多く取って「まだ続きがあるか」を判定する
+  const [rows] = await pool.query(
+    `SELECT b.id, b.title, ${BLOG_DATE_COLUMNS}
+     FROM blog b
+     WHERE b.admin = 1
+     ORDER BY b.created_at DESC, b.id DESC
+     LIMIT ? OFFSET ?`,
+    [limit + 1, offset]
+  );
+  return { posts: rows.slice(0, limit), hasMore: rows.length > limit };
+}
+
+// トップページ（LP）
+app.get("/", async (req, res) => {
+  let latestPosts = [];
+  let hasMorePosts = false;
   try {
-    // DBから本一覧を取得
-    const [books] = await pool.query(
-      "SELECT id, title, price, date FROM books ORDER BY date DESC"
-    );
-
-    res.render("demo", { 
-      styles:'<link rel="stylesheet" href="/css/demo.css">',
-      titles:'<title>エンジニアへの第一歩｜未経験から触れるプログラムの動き｜Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="エンジニアを目指す第一歩。未経験からプログラムの動きを体験し、HTML・CSS・JavaScript・DBの基礎を実際に触れて学べるDemoページです。">',
-
-      // 本一覧をビューに渡す
-      books
-    });
-
+    ({ posts: latestPosts, hasMore: hasMorePosts } = await fetchAdminPosts(0, 5));
   } catch (err) {
-    console.error(err);
-    res.status(500).send("DB error");
+    // ブログが取れなくてもトップは表示する
+    console.error("HOME blog fetch error:", err);
   }
+
+  res.render("home", {
+    layout: SITE_LAYOUT,
+    isHome: true,
+    latestPosts,
+    hasMorePosts,
+    styles: '<link rel="stylesheet" href="/css/home.css">',
+    titles: '<title>沖縄で未経験からエンジニアへ｜AI時代の実践型ITエンジニア採用｜Respoint Okinawa</title>',
+    descriptions: '<meta name="description" content="Respoint Okinawaは沖縄・那覇で未経験からエンジニアに挑戦できる会社です。AI開発ツール「Claude Code」を会社で用意し、お客様の悩みから考える実践研修で、AI時代に選ばれるエンジニアを育てます。">',
+  });
 });
 
-
-//　デモ用のpost
-app.post("/demo", async (req, res) => {
-  const { title, price } = req.body;
-
-  // タイトルのバリデーション
-  if (!title || title.length === 0 || title.length > 30) {
-    return res.status(400).send("タイトルは1〜30文字以内で入力してください");
-  }
-
-  // 価格のバリデーション（整数のみ）
-  if (!price || !/^[0-9]+$/.test(price) || Number(price) <= 0) {
-    return res.status(400).send("価格は正の整数で入力してください");
-  }
-
+// トップのブログ欄：リスト内スクロールで追加読み込みするAPI
+app.get("/api/blog", async (req, res) => {
+  const offset = Math.max(0, Number.parseInt(req.query.offset, 10) || 0);
+  const limit = Math.min(10, Math.max(1, Number.parseInt(req.query.limit, 10) || 5));
   try {
-    await pool.query(
-      "INSERT INTO books (title, price, date) VALUES (?, ?, NOW())",
-      [title, price]
-    );
-    res.redirect("/demo");
+    res.json(await fetchAdminPosts(offset, limit));
   } catch (err) {
-    console.error("DB insert error:", err.message);
-    res.status(500).send("DB error");
+    console.error("BLOG API error:", err);
+    res.status(500).json({ error: "ブログを取得できませんでした。" });
   }
 });
 
+// 旧ページはトップ（LP）に統合したので、該当セクションへ恒久リダイレクト
+const MOVED_PAGES = {
+  "/about": "/#company",
+  "/recruit": "/#reason",
+  "/demo": "/",
+  "/blog-list": "/#blog",
+};
+for (const [from, to] of Object.entries(MOVED_PAGES)) {
+  app.get(from, (req, res) => res.redirect(301, to));
+}
 
-app.get("/recruit", (req, res) => {
-   res.render("recruit", { 
-      styles:'<link rel="stylesheet" href="/css/recruit.css">',
-      titles:'<title>沖縄のエンジニア求人｜文系・未経験からプログラマーへ｜Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="未経験歓迎の沖縄エンジニア求人。文系出身もOK。体系的なカリキュラムとサポートで、ゼロから安心してプログラマーとしてのキャリアを始められます。">'
-   });
-});
+// お問い合わせ
+const CONTACT_PAGE = {
+  layout: SITE_LAYOUT,
+  styles: '<link rel="stylesheet" href="/css/contact.css">',
+  titles: '<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
+  descriptions: '<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
+};
+const renderContact = (res, status, extra) => res.status(status).render("contact", { ...CONTACT_PAGE, ...extra });
+
+// 用件は専用の列を持たないので、内容の先頭にラベルを付けて保存する
+const PURPOSE_LABELS = { recruit: "【採用】", business: "【法人】" };
 
 app.get("/contact", (req, res) => {
-   res.render("contact", { 
-      styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">'
-   });
+  renderContact(res, 200, { form: {} });
 });
 
 // お問い合わせデータ登録
 app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
-  try {
-    const { company, name, email, tel, message } = req.body;
+  const field = (key) => String(req.body[key] ?? "").trim();
+  const form = {
+    purpose: req.body.purpose === "business" ? "business" : "recruit",
+    company: field("company"),
+    name: field("name"),
+    email: field("email"),
+    tel: field("tel"),
+    message: field("message"),
+  };
+  // エラー時は入力内容を残したままフォームを再表示する
+  const fail = (error) => renderContact(res, 400, { error, form });
 
-    // --- 入力バリデーション（最低限） ---
-    if (!name || !email || !message) {
-      return res.status(400).render("contact", {
-        error: "お名前・メールアドレス・内容は必須です。",
-        styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
-      });
+  try {
+    // --- 入力バリデーション ---
+    if (!form.name || !form.email || !form.tel || !form.message) {
+      return fail("お名前・メールアドレス・電話番号・内容は必須です。");
     }
 
     // 日本語（ひらがな）が含まれているかチェック
-    if (!/[ぁ-ん]/.test(message)) {
-      return res.status(400).render("contact", {
-        error: "お問い合わせ内容には日本語（ひらがな）を含めてご記入ください。",
-        styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
-      });
+    if (!/[ぁ-ん]/.test(form.message)) {
+      return fail("お問い合わせ内容には日本語（ひらがな）を含めてご記入ください。");
     }
 
-    if (email.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return res.status(400).render("contact", {
-        error: "正しいメールアドレスを入力してください。",
-        styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
-      });
+    if (form.email.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      return fail("正しいメールアドレスを入力してください。");
     }
 
-    // tel は任意：入力があれば軽い形式チェック（数字/+/ハイフン/空白 7〜30）
-    let telValue = (tel ?? "").trim();
-    if (telValue && !/^[0-9+\-\s]{7,30}$/.test(telValue)) {
-      return res.status(400).render("contact", {
-        error: "電話番号の形式をご確認ください（数字・+・ハイフン・空白のみ）。",
-        styles:'<link rel="stylesheet" href="/css/contact.css">',
-        titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-        descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
-      });
+    // tel は必須：数字/+/ハイフン/空白 7〜30
+    if (!/^[0-9+\-\s]{7,30}$/.test(form.tel)) {
+      return fail("電話番号の形式をご確認ください（数字・+・ハイフン・空白のみ）。");
     }
+
+    // 会社名は法人のご相談のときだけ保存する
+    const company = form.purpose === "business" ? form.company : "";
+    const content = `${PURPOSE_LABELS[form.purpose]}${form.message}`;
 
     // IPアドレスを取得
     function getClientIp(req) {
@@ -426,153 +439,93 @@ app.post("/contact", contactLimitShort, contactLimitLong, async (req, res) => {
       return (req.socket?.remoteAddress || '').replace('::ffff:', '');
     }
 
-    // これに置き換える
     const ipAddress = getClientIp(req).slice(0, 45);
 
-    // --- pool を使ってDBにINSERT（tel列を追加） ---
+    // --- pool を使ってDBにINSERT ---
     await pool.query(
       `INSERT INTO contact (company, name, email, tel, content, status, created_at, ip_address)
        VALUES (?, ?, ?, ?, ?, 0, NOW(), ?)`,
-      [company || "", name.trim(), email.trim(), telValue || "", message.trim(), ipAddress]
+      [company, form.name, form.email, form.tel, content, ipAddress]
     );
 
     // --- 通知メール（失敗してもUXは崩さない） ---
     const notifyPayload = {
-      company: company || "",
-      name: name?.trim(),
-      email: email?.trim(),
-      tel: telValue || "",
-      message: message?.trim(),
+      company,
+      name: form.name,
+      email: form.email,
+      tel: form.tel,
+      message: content,
       ip_address: ipAddress,
       created_at: new Date().toLocaleString(),
     };
 
     try {
       await sendInquiryNotification(notifyPayload);
-      await sendThanksToCustomer(email, name);
+      await sendThanksToCustomer(form.email, form.name);
     } catch (mailErr) {
       console.error("CONTACT mail send error:", mailErr);
       // 画面は成功で返す
     }
 
-    // 成功時
-    res.render("contact", {
-      success: true,
-      styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
-    });
+    // 成功時はフォームを空にして完了メッセージを出す
+    renderContact(res, 200, { success: true, form: {} });
   } catch (err) {
     console.error("CONTACT INSERT error:", err);
-    res.status(500).render("contact", {
-      error: "送信中にエラーが発生しました。時間をおいて再度お試しください。",
-      styles:'<link rel="stylesheet" href="/css/contact.css">',
-      titles:'<title>採用エントリー・お問い合わせ｜Respoint Okinawa</title>',
-      descriptions:'<meta name="description" content="Respoint Okinawaへの採用エントリー・お問い合わせはこちらから。未経験エンジニア応募や事業に関するご相談など、安心してご連絡ください。">',
-    });
+    renderContact(res, 500, { error: "送信中にエラーが発生しました。時間をおいて再度お試しください。", form });
   }
 });
 
-
-// 公開用ブログ一覧
-app.get("/blog-list", async (req, res) => {
-  try {
-    // 管理者投稿
-    const [adminRows] = await pool.query(
-      `SELECT b.id, b.title, b.content,
-              DATE_FORMAT(b.created_at, '%Y-%m-%d') AS created_at,
-              u.name AS author_name
-       FROM blog b
-       JOIN users u ON u.id = b.author_id
-       WHERE b.admin = 1
-       ORDER BY b.created_at DESC`
-    );
-
-    // 一般ユーザー投稿
-    const [userRows] = await pool.query(
-      `SELECT b.id, b.title, b.content,
-              DATE_FORMAT(b.created_at, '%Y-%m-%d') AS created_at,
-              u.name AS author_name
-       FROM blog b
-       JOIN users u ON u.id = b.author_id
-       WHERE b.admin = 0
-       ORDER BY b.created_at DESC`
-    );
-
-    // 抜粋を作る（contentの先頭100文字など）
-    const makeExcerpt = (text) => {
-      if (!text) return "";
-      return text.length > 100 ? text.slice(0, 100) + "…" : text;
-    };
-
-    const adminPosts = adminRows.map((row) => ({
-      ...row,
-      excerpt: makeExcerpt(row.content),
-      created_at_iso: new Date(row.created_at).toISOString().split("T")[0]
-    }));
-
-    const employeePosts = userRows.map((row) => ({
-      ...row,
-      excerpt: makeExcerpt(row.content),
-      created_at_iso: new Date(row.created_at).toISOString().split("T")[0]
-    }));
-
-    res.render("blog-list", {
-      titles: "<title>未経験からエンジニアへ｜社員の学びと成長のブログ｜Respoint Okinawa</title>",
-      styles: '<link rel="stylesheet" href="/css/blog-list.css">',
-      descriptions: '<meta name="description" content="Respoint Okinawaのブログでは、未経験からエンジニアを目指す社員の学びや挑戦を記録。リアルな成長ストーリーを通して、あなたのITキャリアの第一歩を応援します。">',
-      adminPosts,
-      employeePosts,
-      adminCount: adminPosts.length,
-      employeeCount: employeePosts.length
-    });
-  } catch (err) {
-    console.error("ブログ一覧取得エラー:", err);
-    res.render("blog-list", {
-      error: "ブログ一覧を取得できませんでした。",
-      adminPosts: [],
-      employeePosts: [],
-      adminCount: 0,
-      employeeCount: 0
-    });
-  }
-});
-
-// 公開ブログ詳細ページ
+// 公開ブログ詳細ページ（経営者投稿のみ）
 app.get("/blog/:id", async (req, res) => {
-  const postId = req.params.id;
+  if (!/^[0-9]+$/.test(req.params.id)) return render404(res);
+  const postId = Number(req.params.id);
 
   try {
     const [rows] = await pool.query(
-      `SELECT b.id, b.title, b.content,
-              DATE_FORMAT(b.created_at, '%Y-%m-%d %H:%i') AS created_at,
-              u.name AS author_name,
-              b.admin
+      `SELECT b.id, b.title, b.content, b.created_at AS created_raw, ${BLOG_DATE_COLUMNS},
+              u.name AS author_name
        FROM blog b
        JOIN users u ON u.id = b.author_id
-       WHERE b.id = ?`,
+       WHERE b.id = ? AND b.admin = 1`,
       [postId]
     );
 
-    if (rows.length === 0) {
-      return res.status(404).render("404", {
-        titles: "<title>記事が見つかりません</title>"
-      });
-    }
-
+    if (rows.length === 0) return render404(res);
     const post = rows[0];
 
+    // 前後の記事（経営者投稿の中だけ・トップの一覧と同じ並び順）
+    const [[prevPost]] = await pool.query(
+      `SELECT id, title FROM blog
+       WHERE admin = 1 AND (created_at < ? OR (created_at = ? AND id < ?))
+       ORDER BY created_at DESC, id DESC
+       LIMIT 1`,
+      [post.created_raw, post.created_raw, post.id]
+    );
+    const [[nextPost]] = await pool.query(
+      `SELECT id, title FROM blog
+       WHERE admin = 1 AND (created_at > ? OR (created_at = ? AND id > ?))
+       ORDER BY created_at ASC, id ASC
+       LIMIT 1`,
+      [post.created_raw, post.created_raw, post.id]
+    );
+
     res.render("blog-content", {
+      layout: SITE_LAYOUT,
       post,
-      roleLabel: post.admin ? "経営者投稿" : "社員投稿",
-      roleClass: post.admin ? "pill-admin" : "pill-emp",
+      prevPost,
+      nextPost,
       styles: '<link rel="stylesheet" href="/css/blog-content.css">',
-      titles: `<title>${post.title}</title>`,
-      descriptions: `<meta name="description" content="${post.content.slice(0, 80)}">`
+      titles: `<title>${escapeHtml(post.title)}｜Respoint Okinawa</title>`,
+      descriptions: `<meta name="description" content="${escapeHtml(post.content.replace(/\s+/g, " ").slice(0, 80))}">`,
     });
   } catch (err) {
     console.error("BLOG DETAIL error:", err);
-    res.status(500).render("500", { error: "記事の読み込みに失敗しました。" });
+    res.status(500).render("404", {
+      ...NOT_FOUND_PAGE,
+      code: 500,
+      heading: "記事を読み込めませんでした",
+      message: "時間をおいて再度お試しください。",
+    });
   }
 });
 
@@ -1271,11 +1224,7 @@ adminRouter.post("/contact/:id/status", csrfProtection, async (req, res) => {
 
 // 404 ページ用ミドルウェア
 app.use((req, res) => {
-  res.status(404).render('404', {
-      styles:'<link rel="stylesheet" href="/css/404.css">',
-      titles:'<title>ページが見つかりませんRespoint Okinawa</title>',
-      descriptions:'<meta name="description" content="404ページ">'
-  });
+  render404(res);
 });
 
 app.listen(port, '127.0.0.1', () => {

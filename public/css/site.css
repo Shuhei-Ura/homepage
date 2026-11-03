@@ -1,0 +1,97 @@
+/* 公開ページ共通スタイル（layouts/site.handlebars） */
+:root{
+  --bg:#f3f6fa;
+  --white:#fff;
+  --ink:#14213d;
+  --muted:#5b6782;
+  --line:#dde3ec;
+  --navy:#17397a;
+  --navy-deep:#0f2a5c;
+  --navy-pale:#e3eaf5;
+  --orange:#f5822a;
+  --orange-pale:#fdeee2;
+  --en:"Poppins",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-color:var(--bg);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='120' viewBox='0 0 560 120'%3E%3Cpath d='M0 40 C70 10 140 70 210 40 S350 10 420 40 S560 70 560 40' fill='none' stroke='%2317397a' stroke-opacity='.06' stroke-width='1.5'/%3E%3Cpath d='M0 100 C70 70 140 130 210 100 S350 70 420 100 S560 130 560 100' fill='none' stroke='%2317397a' stroke-opacity='.035' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size:560px 120px}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:min(1160px,100%);margin:0 auto;padding:0 24px}
+@media (max-width:640px){.container{padding:0 16px}}
+.sun{display:inline-block;width:.22em;height:.22em;border-radius:50%;background:var(--orange);margin-left:.06em;vertical-align:baseline}
+.mk{background:linear-gradient(transparent 62%,rgba(245,130,42,.32) 62%)}
+.o{color:var(--orange)}
+
+/* header */
+.hdr{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,box-shadow .3s}
+.hdr.is-scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.hdr__in{display:flex;align-items:center;justify-content:space-between;height:84px}
+.logo{display:block;width:160px;height:56px;overflow:hidden}
+.logo img{width:200px;max-width:none;margin:-64px 0 0 -24px}
+.nav{display:flex;align-items:center;gap:30px;font-weight:700;font-size:14px}
+.nav a:not(.btn){position:relative}
+.nav a:not(.btn)::after{content:"";position:absolute;left:50%;bottom:-6px;width:5px;height:5px;border-radius:50%;background:var(--orange);transform:translateX(-50%) scale(0);transition:transform .25s}
+.nav a:not(.btn):hover::after{transform:translateX(-50%) scale(1)}
+.menu-btn{display:none;width:48px;height:48px;border-radius:50%;border:0;background:var(--navy);cursor:pointer;position:relative}
+.menu-btn span{position:absolute;left:15px;width:18px;height:2px;background:#fff;transition:transform .3s,opacity .3s}
+.menu-btn span:nth-child(1){top:19px}.menu-btn span:nth-child(2){top:27px}
+body.menu-open .menu-btn span:nth-child(1){transform:translateY(4px) rotate(45deg)}
+body.menu-open .menu-btn span:nth-child(2){transform:translateY(-4px) rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:45;background:var(--white);padding:110px 24px 40px;display:flex;flex-direction:column;gap:4px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+body.menu-open .drawer{opacity:1;visibility:visible}
+.drawer a{font-weight:700;font-size:18px;padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.drawer a small{font-family:var(--en);color:var(--orange);font-size:12px;letter-spacing:.1em}
+@media (max-width:960px){.nav{display:none}.menu-btn{display:block}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:16px 30px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn--o{background:var(--orange);color:#fff;box-shadow:0 8px 20px -8px rgba(245,130,42,.8)}
+.btn--o:hover{transform:translateY(-2px)}
+.btn--w{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn--w:hover{border-color:var(--navy)}
+.btn--sm{padding:11px 22px;font-size:14px}
+.arrow{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.25);font-size:12px}
+.btn--w .arrow{background:var(--navy);color:#fff}
+
+/* section head */
+.sec{padding:140px 0}
+@media (max-width:640px){.sec{padding:90px 0}}
+.en-title{font-family:var(--en);font-weight:700;font-size:clamp(44px,7vw,88px);line-height:1;letter-spacing:-.02em;margin:0;color:var(--navy)}
+.en-title b{color:var(--orange);font-weight:700}
+.ja-sub{font-weight:700;font-size:14px;color:var(--muted);margin:14px 0 0;display:flex;align-items:center;gap:10px}
+.ja-sub::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.h2{font-size:clamp(24px,3.2vw,38px);font-weight:900;line-height:1.5;margin:0}
+.lead{color:var(--muted);font-size:15px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+
+/* wave-cut photo */
+.wave{clip-path:url(#waveClip)}
+
+
+/* footer */
+.ftr{padding:70px 0 120px;background:#fff;margin-top:100px;font-size:14px;color:var(--muted)}
+.ftr__grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.ftr nav{display:flex;flex-wrap:wrap;gap:10px 26px;font-weight:700;color:var(--ink)}
+.ftr address{font-style:normal;margin-top:16px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* トップ以外のページ：ヘッダーは常に白、本文はヘッダー分下げる */
+.page{padding-top:84px}
+
+/* パンくず・ページ見出し（お問い合わせ・記事ページ共通） */
+.crumb{font-size:12px;color:var(--muted);margin:0 0 30px}
+.crumb a{color:var(--navy);font-weight:700}
+
+/* SEO用の非表示テキスト */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ftr__copy{margin-top:30px;font-family:var(--en);font-size:12px}
+
+/* <button> で使うときのリセット */
+button.btn{border:0;cursor:pointer;font-family:inherit}

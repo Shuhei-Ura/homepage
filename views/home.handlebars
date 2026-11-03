@@ -2,197 +2,265 @@
   <script src="/js/home.js"></script>
 {{/section}}
 
-<!-- SEO用のh1　非表示 -->
-<h1 class="sr-only">沖縄で未経験からエンジニアへ｜ゼロから始めるITキャリア｜Respoint Okinawa</h1>
+<!-- 写真の下辺を波形に切り抜くクリップパス（ロゴの波モチーフ） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <clipPath id="waveClip" clipPathUnits="objectBoundingBox">
+    <path d="M0,0.05 Q0,0 0.05,0 H0.95 Q1,0 1,0.05 V0.88 C0.84,0.8 0.7,0.98 0.5,0.92 C0.32,0.86 0.16,0.99 0,0.93 Z"/>
+  </clipPath>
+</svg>
 
-<!-- home heroセクション -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero__slides">
-    <!-- スライド1 -->
-    <div class="hero__slide">
-      <img src="/images/hero1.png" alt="沖縄で未経験からエンジニアやプログラマーを目指す文系・第二新卒の若手がキャリアの第一歩を踏み出すイメージ｜那覇での求人・研修付き採用情報">
-    </div>
-    <!-- スライド2 -->
-    <div class="hero__slide">
-      <img src="/images/hero2.png" alt="那覇の街並みから全国へ挑戦する若手エンジニア育成企業｜沖縄で未経験・文系からでも応募できるSES求人と研修採用支援">
-    </div>
-    <!-- スライド3 -->
-    <div class="hero__slide">
-      <img src="/images/hero3.png" alt="ノートPCで学習する若手未経験者がエンジニア・プログラマーとして成長する姿｜沖縄 那覇の求人・研修付き採用で文系からでもITキャリアを実現">
-    </div>
-
-    <!-- オーバーレイ -->
-    <div class="hero__veil" aria-hidden="true"></div>
-
-    <!-- キャッチコピー -->
-    <h2 id="hero-title" class="hero__title">
-      沖縄で未経験からエンジニアへ<br>
-      キャリアの第一歩を、今。
-    </h2>
+<!-- ① FV -->
+<section class="hero">
+  <div class="hero__mark" aria-hidden="true"></div>
+  <div class="strip" aria-hidden="true">
+    <!-- 1セット目 -->
+    <figure class="wave"><img src="/images/anniversary.jpg" style="object-position:30% 50%" alt=""></figure>
+    <figure class="wave"><div class="term"><div class="bar"><i></i><i></i><i></i></div><span class="p">&gt;</span> 予約をLINEでも受けたい、<br>&nbsp;&nbsp;という相談をもらった<br><span class="c"># まず業務の流れを整理しよう</span><br><span class="p">&gt;</span> 設計案を一緒に考えて<br><span class="ok">✓ 画面設計 3案を作成</span><br><span class="ok">✓ DB設計をレビュー</span><br><span class="c"># 判断するのは、自分。</span></div></figure>
+    <figure class="wave"><img src="/images/shuhei-img.jpeg" style="object-position:50% 25%" alt=""></figure>
+    <figure class="wave"><img src="/images/recruit-teaching.jpg" alt=""></figure>
+    <figure class="wave"><img src="/images/anniversary.jpg" style="object-position:80% 50%" alt=""></figure>
+    <!-- 2セット目（ループ用） -->
+    <figure class="wave"><img src="/images/anniversary.jpg" style="object-position:30% 50%" alt=""></figure>
+    <figure class="wave"><div class="term"><div class="bar"><i></i><i></i><i></i></div><span class="p">&gt;</span> 予約をLINEでも受けたい、<br>&nbsp;&nbsp;という相談をもらった<br><span class="c"># まず業務の流れを整理しよう</span><br><span class="p">&gt;</span> 設計案を一緒に考えて<br><span class="ok">✓ 画面設計 3案を作成</span><br><span class="ok">✓ DB設計をレビュー</span><br><span class="c"># 判断するのは、自分。</span></div></figure>
+    <figure class="wave"><img src="/images/shuhei-img.jpeg" style="object-position:50% 25%" alt=""></figure>
+    <figure class="wave"><img src="/images/recruit-teaching.jpg" alt=""></figure>
+    <figure class="wave"><img src="/images/anniversary.jpg" style="object-position:80% 50%" alt=""></figure>
   </div>
-</section>
-
-<!-- aboutの導線 -->
-<section class="section-lead" aria-labelledby="about-lead-title">
-  <div class="section-lead__text">
-    <h2 id="about-lead-title" class="section-lead__title">私たちについて</h2>
-    <p class="section-lead__desc">
-      「自分にも価値がある」「挑戦してよかった」―― <br>
-      そう思える経験は、人生に大きな自信と幸福をもたらします。
-    </p>
-    <p class="section-lead__desc">
-      私たちは未経験からエンジニアに挑戦する若手に、その実感を届けたい。<br>
-      ここからキャリアを始める人が、未来に希望を持てるよう全力で支援します。
-    </p>
-    <div class="section-lead__actions">
-        <a href="/about" class="btn-readmore">READ MORE</a>
-    </div>
-  </div>
-
-  <figure class="section-lead__media">
-    <img
-      src="/images/about-img.png"
-      alt="沖縄から全国へ挑戦する若手エンジニアが未来を見据え、都会のビルを見上げるイメージ｜未経験からの成長とキャリア形成"
-      width="1600" height="900" loading="lazy" decoding="async">
-    <img src="/images/whats-next.png" alt="" class="lead-deco lead-deco--about" aria-hidden="true">
-  </figure>
-
-</section>
-
-<!-- recruitの導線 -->
-<section class="section-lead section-lead--recruit" aria-labelledby="recruit-lead-title">
-  <figure class="section-lead__media">
-    <img
-      src="/images/recruit-img.png"
-      alt="沖縄・那覇で未経験からエンジニアを目指す若手が、PCやスマホから求人に応募する様子｜研修付き採用で文系からでも安心してキャリアをスタートできる"
-      width="1600" height="900" loading="lazy" decoding="async">
-    <img src="/images/step-forward.png" alt="" class="lead-deco lead-deco--recruit" aria-hidden="true">
-  </figure>
-
-  <div class="section-lead__text">
-    <h2 id="recruit-lead-title" class="section-lead__title">未経験エンジニア積極採用中</h2>
-    <p class="section-lead__desc">
-      「新しいことに挑戦したい」その気持ちさえあれば大丈夫。文系出身や社会人経験が浅い方も歓迎します。あなたのエントリーをお待ちしています。
-    </p>
-    <p class="section-lead__desc">
-      「どんなカリキュラムで学べるのか」「どのように成長していけるのか」を知りたい方は、Recruitページをご覧ください。<br>
-      あなたの挑戦に寄り添い、学びから現場デビューまで丁寧にサポートします。
-    </p>
-    <div class="section-lead__actions">
-      <a href="/recruit" class="btn-readmore">Recruitページへ</a>
+  <div class="container hero__copy">
+    <h1>AI時代に、<span class="o nw">“手遅れにならない”</span><span class="nw">エンジニアへ。</span></h1>
+    <p class="hero__tag">沖縄でゼロから始める、実践型ITエンジニア採用</p>
+    <p class="hero__sub">「コードを書くだけ」の時代は終わった。<br>Claude CodeなどのAIツール × 実践研修で、お客様の悩みから考えられる“選ばれる”エンジニアへ。</p>
+    <div class="hero__cta">
+      <a href="#entry" class="btn btn--o">まずは話を聞いてみる <span class="arrow">→</span></a>
+      <a href="#job" class="btn btn--w">募集要項を見る <span class="arrow">↓</span></a>
     </div>
   </div>
 </section>
 
-<!-- 事業紹介セクション -->
-<section class="business" aria-labelledby="business-title">
-  <div class="business__container">
-    <h2 id="business-title" class="section-lead__title">事業内容</h2>
+<!-- ② 悩み -->
+<section class="sec" style="padding-top:60px">
+  <div class="container">
+    <p class="en-title rv">Worries<span class="sun"></span></p>
+    <p class="ja-sub rv">こんな不安、ありませんか？</p>
+    <div class="pain__grid">
+      <div class="bubble rv"><span class="q">VOICE 01</span>未経験からIT業界に挑戦したいけど、<span class="mk">ついていけるか不安…</span></div>
+      <div class="bubble rv" style="transition-delay:.1s"><span class="q">VOICE 02</span>ただのコード打ちではなく、<span class="mk">将来も必要とされるスキル</span>を身につけたい</div>
+      <div class="bubble rv" style="transition-delay:.2s"><span class="q">VOICE 03</span>地元・沖縄で、<span class="mk">キャリアと給与をしっかり上げていきたい</span></div>
+    </div>
+    <div class="pain__answer rv">
+      <div class="down"></div>
+      <p class="h2">その不安、<span class="o">Respoint</span>なら<br>“強み”に変えられます。</p>
+    </div>
+  </div>
+</section>
 
-    <div class="business__grid">
-      <!-- SES事業 -->
-      <article class="business-card">
-        <figure class="business-card__media">
-          <img src="/images/introduce-ses.png"
-               alt="沖縄を拠点に若手エンジニアがSESプロジェクトに参加し、PCやモニターで実務に取り組む様子｜未経験からの研修後に全国で活躍できるSES求人・採用情報">
-          <h3 class="business-card__heading">システム開発事業</h3>
-        </figure>
-        <p class="business-card__desc">
-          沖縄を拠点にシステム開発・運用プロジェクトへエンジニアを参画させています。<br>
-          一人ひとりのスキルや志向に合わせた配属で、現場で実践的な経験を積みながら成長できる環境を提供。<br>
-          お客様には即戦力となる人材を、エンジニアには長期的なキャリア形成を支援する仕組みを整えています。
-        </p>
+<!-- ③ 4つの理由 -->
+<section class="block sec" id="reason">
+  <div class="block__bg" aria-hidden="true">WHY RESPOINT — WHY RESPOINT — WHY RESPOINT — WHY RESPOINT —&nbsp;</div>
+  <div class="container" style="position:relative">
+    <p class="en-title rv">Reason<span class="sun"></span></p>
+    <p class="ja-sub rv">Respointが選ばれる4つの理由</p>
+    <div class="reasons">
+      <article class="reason rv">
+        <div class="reason__no"><small>REASON</small>01</div>
+        <div>
+          <h3>AI開発ツール「Claude Code」を会社で用意。<br>“AIに使われる側”ではなく“使いこなす側”へ。</h3>
+          <p>有料ツールを自分で契約しなくても、会社のアカウントで使い方から学べます。「このコードは何をしているの？」と解説してもらったり、分からないことを相談したり。学ぶうえでの“相棒”として思いきり使ってください。</p>
+          <div class="tags"><span>Claude Code 支給</span><span>使い方から指導</span></div>
+        </div>
       </article>
-
-      <!-- 教育事業 -->
-      <article class="business-card">
-        <figure class="business-card__media">
-          <img src="/images/introduce-education.png"
-               alt="未経験や文系出身の若手が沖縄・那覇で研修に参加し、ノートやPCを使って学び合う様子｜エンジニア・プログラマー育成の教育事業と求人採用支援">
-          <h3 class="business-card__heading">教育事業</h3>
-        </figure>
-        <p class="business-card__desc">
-          未経験からエンジニアを目指す方に向け、課題提出とフィードバックを軸にした伴走型の支援を行います。<br>
-          自分で手を動かし、提出した成果に対して具体的なアドバイスを受けることで、着実に力を積み上げられる仕組みです。
-        </p>
+      <article class="reason rv">
+        <div class="reason__no"><small>REASON</small>02</div>
+        <div>
+          <h3>“作り方”だけでなく“考え方”が身につく、<br>お客様の悩みから考える実践研修。</h3>
+          <p>企業の悩みをもとにしたケーススタディから、興味のあるテーマを選んで取り組みます。お客様の話を聞き、どんなシステムにするかを考え、作って公開するまで。代表が実際に経験してきた開発の流れをもとにした、実務に近い研修です。</p>
+          <div class="tags"><span>ケーススタディ</span><span>GitHub</span><span>Docker</span><span>データベース</span></div>
+        </div>
       </article>
-
+      <article class="reason rv">
+        <div class="reason__no"><small>REASON</small>03</div>
+        <div>
+          <h3>卒業時には「自分だけのポートフォリオ」が完成。</h3>
+          <p>作って終わりではなく、完成したシステムは自分でサーバーに公開します。エンジニアデビューのとき、そのまま実績としてアピールできます。</p>
+          <div class="tags"><span>サーバー公開</span><span>実績として残る</span></div>
+        </div>
+      </article>
+      <article class="reason reason--salary rv">
+        <div class="reason__no"><small>REASON</small>04</div>
+        <div>
+          <h3>努力が正当に評価される、<br>明確なキャリア＆給与アップ。</h3>
+          <p>スキルが上がるほど給与も上がるのがエンジニア。会社として教育や営業に投資し、一人ひとりのキャリアアップを支援しています。</p>
+        </div>
+        <div>
+          <div class="stairs" id="stairs">
+            <div class="stair"><span class="v">25<small>万円</small></span><span class="b"></span><span class="y">1年目</span></div>
+            <div class="stair"><span class="v">37.5<small>万円</small></span><span class="b"></span><span class="y">2年目</span></div>
+            <div class="stair"><span class="v">50<small>万円</small></span><span class="b"></span><span class="y">3年目</span></div>
+          </div>
+          <p class="note">※月給のモデルケースです。実際の給与額を保証するものではありません。</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- Zoho の導線 -->
-<section class="section-lead section-lead--demo" aria-labelledby="demo-lead-title">
-  <div class="section-lead__text">
-    <h2 id="demo-lead-title" class="section-lead__title">Zohoで業務改善を進めやすく</h2>
-    <p class="section-lead__desc">
-      顧客管理や問い合わせ管理、社内共有など、Zohoを活用した業務改善のご相談にも対応しています。<br>
-      導入前の整理から構築、運用改善まで、現場に合った形でサポートします。
-    </p>
+<!-- 研修ロードマップ -->
+<section class="sec" id="roadmap">
+  <div class="container">
+    <p class="en-title rv">Roadmap<span class="sun"></span></p>
+    <p class="ja-sub rv">入社から現場デビューまで</p>
+    <div class="road">
+      <div class="stage rv"><span class="stage__dot">01</span><div class="stage__card"><b>START</b><h3>入社・業務スタート</h3><p>当社が用意する業務に従事しながら、業務後や休日に研修カリキュラムをスタート。自分のペースで進められます。</p></div></div>
+      <div class="stage rv" style="transition-delay:.1s"><span class="stage__dot">02</span><div class="stage__card"><b>BASIC</b><h3>現場のツールに触れる</h3><p>GitHub・Docker・データベースなど現場で当たり前のツールと、Claude Codeの使い方を身につけます。</p></div></div>
+      <div class="stage rv" style="transition-delay:.2s"><span class="stage__dot">03</span><div class="stage__card"><b>CASE STUDY</b><h3>お客様の悩みから考える</h3><p>テーマを選び、ヒアリング → 設計 → 開発。「どんなシステムなら解決できるか」を自分で考えます。</p></div></div>
+      <div class="stage rv" style="transition-delay:.3s"><span class="stage__dot">04</span><div class="stage__card"><b>DEBUT</b><h3>公開・プロジェクト参画</h3><p>自作システムをサーバーに公開してポートフォリオに。スキルに応じて段階的にプロジェクトへ参画します。</p></div></div>
+    </div>
+    <p class="road-note rv">各ステップの期間は、一人ひとりの進み具合に合わせます。</p>
   </div>
-  <figure class="section-lead__media">
-    <a href="https://respoint.zohosites.com/"><img
-      src="/images/Zoho.png"
-      alt="Zohoでの業務改善ページ"
-      width="1600" height="800" loading="lazy" decoding="async">
+</section>
+
+<!-- ④ 実績・キャリア -->
+<section class="sec" id="projects" style="padding-top:20px">
+  <div class="container split">
+    <div class="split__side">
+      <p class="en-title rv"><b>P</b>rojects<span class="sun"></span></p>
+      <p class="ja-sub rv">参画実績とキャリア</p>
+      <h2 class="h2 rv">研修のあとは、<br>“本物の現場”へ。</h2>
+      <p class="desc rv">スキルに応じて段階的にプロジェクトへ参画。HP制作から大手企業のシステム開発まで、希望や適性に合わせてお任せします。</p>
+    </div>
+    <div>
+      <div class="panel rv">
+        <div class="panel__head"><h3>Works</h3><span>当社エンジニアの参画実績</span></div>
+        <div class="item"><span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg></span><div><h4>銀行のインフラ</h4><p>社会を支える金融システムの基盤に携わる。</p></div></div>
+        <div class="item"><span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><div><h4>大手通信キャリアのモバイルアプリ開発</h4><p>多くのユーザーが日常的に使うアプリの開発。</p></div></div>
+        <div class="item"><span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15h5"/></svg></span><div><h4>AIエージェント開発</h4><p>これからの主役になる技術の最前線へ。</p></div></div>
+        <div class="item"><span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.4M16.8 8.2l-3.6 7.4"/></svg></span><div><h4>Zohoを使った業務システム開発</h4><p>企業の業務をひとつにつなぐ仕組みづくり。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 働く環境 -->
+<section class="sec" id="env" style="padding-top:40px">
+  <div class="container">
+    <div class="head-row">
+      <div>
+        <p class="en-title rv">Okinawa<span class="sun"></span></p>
+        <p class="ja-sub rv">地元・沖縄で、腰を据えて働く</p>
+      </div>
+      <p class="lead rv" style="max-width:480px;margin:0">研修は業務後や休日に、自分のペースで。成長とプライベートを両立しながら、那覇で長く働ける環境です。</p>
+    </div>
+    <figure class="env__photo wave rv"><img src="/images/anniversary.jpg" alt="Respoint Okinawa 設立1周年パーティの集合写真"><figcaption>1st Anniversary</figcaption></figure>
+    <div class="env__grid">
+      <div class="env__card env__card--o rv"><div class="k">年間休日</div><div class="v"><span class="num">120</span>日以上</div><div class="n">夏季休暇・年末年始休暇・有給休暇</div></div>
+      <div class="env__card rv"><div class="k">完全週休2日制</div><div class="v">土日祝 休み</div><div class="n">平日 10:00〜19:00（休憩1時間）</div></div>
+      <div class="env__card rv"><div class="k">勤務地</div><div class="v">転勤なし</div><div class="n">那覇市銘苅（ゆいレール古島駅 徒歩11分）</div></div>
+      <div class="env__card rv"><div class="k">通勤</div><div class="v">車・バイクOK</div><div class="n">自転車通勤も可・交通費支給（規定あり）</div></div>
+      <div class="env__card rv"><div class="k">服装</div><div class="v">自由</div><div class="n">服装・髪型自由</div></div>
+      <div class="env__card rv"><div class="k">スキルアップ</div><div class="v">資格取得支援</div><div class="n">自社エンジニア研修制度あり</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 求める人物像 -->
+<section class="sec person" style="padding-top:40px">
+  <div class="container">
+    <p class="en-title rv">Who We Want<span class="sun"></span></p>
+    <p class="person__quote rv">必要なのは、<br><span class="mk">「新しいことに挑戦したい」</span><br>その気持ちだけ。</p>
+    <div class="chips rv"><span>経験不問</span><span>学歴不問</span><span>スキル不問</span><span class="o2">人柄・ポテンシャル重視</span></div>
+    <div class="checks rv">
+      <h3>こんな方におすすめ</h3>
+      <ul>
+        <li>未経験からIT業界に挑戦したい</li>
+        <li>将来に不安があり、手に職をつけたい</li>
+        <li>頑張るほど給与が上がる仕事がしたい</li>
+        <li>チームで支え合いながら働きたい</li>
+        <li>沖縄で安定して長く働きたい</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 代表メッセージ・会社概要 -->
+<section class="sec" id="company" style="padding-top:40px">
+  <div class="container">
+    <p class="en-title rv">Message<span class="sun"></span></p>
+    <p class="ja-sub rv">代表メッセージ</p>
+    <div class="msg" style="margin-top:56px">
+      <figure class="msg__photo wave rv" style="margin:0"><img src="/images/shuhei-img.jpeg" alt="代表取締役 浦周平"></figure>
+      <div class="rv">
+        <h2 class="h2">「自分にもできる」と<br>思える瞬間を、沖縄から届けたい。</h2>
+        <p>私が事業を始めた原点には、「自分の価値を信じられることは、人生の大きな幸福につながる」という実感があります。私自身、営業というキャリアを通じて「自分を必要としてくれる場所はきっとある」と思えるようになりました。</p>
+        <p>未経験からエンジニアを目指す方にも、「自分にもできる」「社会に貢献できる」と思える瞬間を届けたい。単なる技術習得ではなく、自信を育てるプロセスを大切にしています。</p>
+        <p class="msg__name"><small>株式会社Respoint Okinawa 代表</small>浦 周平</p>
+      </div>
+    </div>
+    <div class="company rv">
+      <dl>
+        <dt>社名</dt><dd>株式会社Respoint Okinawa</dd>
+        <dt>代表者</dt><dd>浦 周平</dd>
+        <dt>設立</dt><dd>2025年10月16日</dd>
+        <dt>資本金</dt><dd>990万円</dd>
+        <dt>事業内容</dt><dd>ITエンジニア輩出関連事業／システム開発事業</dd>
+        <dt>所在地</dt><dd>〒900-0004 沖縄県那覇市銘苅2丁目3-1 なは産業支援センターBコア1階</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ブログ・Zoho -->
+<section class="sec" id="blog" style="padding-top:20px">
+  <div class="container">
+    <p class="en-title rv">Blog<span class="sun"></span></p>
+    <p class="ja-sub rv">経営と学びのリアル — 代表の記録</p>
+    <div class="posts-box rv{{#unless hasMorePosts}} is-end{{/unless}}" id="postsBox">
+      <ul class="posts" id="posts" data-offset="{{latestPosts.length}}">
+        {{#each latestPosts}}
+        <li><a href="/blog/{{this.id}}"><time datetime="{{this.created_at_iso}}">{{this.created_at}}</time><h3>{{this.title}}</h3><span class="go">→</span></a></li>
+        {{else}}
+        <li class="end">記事はまだありません</li>
+        {{/each}}
+        {{#if hasMorePosts}}
+        <li class="loader" id="postsSentinel"><i></i><i></i><i></i></li>
+        {{/if}}
+      </ul>
+    </div>
+    {{#if hasMorePosts}}<p class="posts-hint rv">リスト内をスクロールすると過去の記事が出てきます</p>{{/if}}
+    <a class="zoho rv" href="https://respoint.zohosites.com/">
+      <div><b>FOR BUSINESS</b><strong>法人のお客様へ — Zohoで業務改善</strong><p>顧客管理・問い合わせ管理・社内共有をZohoでひとつに。導入から運用改善までご相談ください。</p></div>
+      <span class="btn btn--w btn--sm">Zohoサイトへ <span class="arrow">↗</span></span>
     </a>
-  </figure>
-</section>
-
-<!-- demo の導線（画像：start-demo.png を使用） -->
-<section class="section-lead section-lead--demo" aria-labelledby="demo-lead-title">
-  <div class="section-lead__text">
-    <h2 id="demo-lead-title" class="section-lead__title">まずは触って体験しよう！</h2>
-    <p class="section-lead__desc">
-      このDemoでは、Webシステムの基本要素に気軽に触れることができます。
-    </p>
-    <p class="section-lead__desc">
-      フォームに入力したり、ボタンを押したり、色や形を変えてみたり――<br>
-      身近な操作を通じて、Webシステムがどのように作られているのかを体感できます。
-    </p>
   </div>
-  <figure class="section-lead__media">
-    <a href="/demo"><img
-      src="/images/start-demo.png"
-      alt="Web開発の体験デモを今すぐ開始｜START DEMO"
-      width="1600" height="800" loading="lazy" decoding="async">
-    </a>
-  </figure>
 </section>
 
-<!-- blog の導線（画像：blog-hero.png を使用） -->
-<section class="section-lead section-lead--blog" aria-labelledby="blog-lead-title">
-  <div class="section-lead__text">
-    <h2 id="blog-lead-title" class="section-lead__title">経営と学びのリアルを公開中</h2>
-    <p class="section-lead__desc">
-      代表の経営記録を発信しています。
-    </p>
-    <div class="section-lead__actions">
-      <a href="/blog-list" class="btn-readmore">Blogを読む</a>
-    </div>
-  </div>
-
-  <figure class="section-lead__media">
-    <img
-      src="/images/home-bloglead.png"
-      alt="ノートとPCで日々の学びや経営の記録を残すイメージ｜Respoint Okinawa公式ブログ"
-      width="1600" height="900" loading="lazy" decoding="async">
-  </figure>
-</section>
-
-
-<!-- お問い合わせバナー -->
-<section class="cta-banner" aria-labelledby="cta-banner-title">
-  <div class="cta-banner__inner">
-    <div class="cta-banner__text">
-      <h2 id="cta-banner-title" class="cta-banner__title">挑戦の不安も、成長の希望も。</h2>
-      <p class="cta-banner__desc">
-        まずは私たちにご相談ください。<br>
-        未経験からの挑戦を、私たちが伴走します。
-      </p>
-    </div>
-    <div class="cta-banner__actions">
-      <a href="/contact" class="cta-banner__button" aria-label="お問い合わせページへ">お問い合わせ</a>
+<!-- 募集要項 -->
+<section class="sec" id="job" style="padding-top:20px">
+  <div class="container">
+    <p class="en-title rv">Job<span class="sun"></span></p>
+    <p class="ja-sub rv">募集要項 — ITエンジニア（未経験歓迎）</p>
+    <div class="job rv">
+      <details open><summary>仕事内容</summary><div class="body">Webサイトやアプリケーション、業務システムの設計・開発などに携わるエンジニア職です。入社後は当社が用意する業務（配属先により異なります）に従事しながら、業務後や休日に研修カリキュラムを進めます。研修後はスキルに応じて段階的にプロジェクトへ参画します。</div></details>
+      <details><summary>給与</summary><div class="body">月給 210,000円〜350,000円（固定残業代12時間分 15,360円を含む。超過分は追加支給）<br>昇給あり・インセンティブあり／スキル・経験を考慮し決定<br>試用期間6か月：月給 180,000円〜250,000円（同条件の固定残業代を含む）</div></details>
+      <details><summary>勤務時間・休日</summary><div class="body">平日（月〜金）10:00〜19:00（休憩1時間）※プロジェクトにより変動あり<br>完全週休2日制（土日祝）／年間休日120日以上／夏季休暇／年末年始休暇／有給休暇</div></details>
+      <details><summary>勤務地・アクセス</summary><div class="body">沖縄県那覇市銘苅2-3-1 なは産業支援センターBコア1階（屋内禁煙）<br>ゆいレール古島駅から徒歩11分／転勤なし／マイカー・バイク・自転車通勤可</div></details>
+      <details><summary>待遇・福利厚生</summary><div class="body"><ul><li>各種社会保険完備</li><li>交通費支給（社内規定あり）</li><li>資格取得支援制度・自社エンジニア研修制度</li><li>AI開発ツール「Claude Code」を会社で用意</li><li>服装・髪型自由</li></ul></div></details>
+      <details><summary>応募資格</summary><div class="body">経験・学歴・スキルは一切不問。人柄・ポテンシャル重視の採用です。</div></details>
     </div>
   </div>
 </section>
+
+<!-- ⑦ CTA -->
+<section class="block cta" id="entry">
+  <div class="block__bg" aria-hidden="true" style="top:auto;bottom:40px">LET'S TALK — LET'S TALK — LET'S TALK — LET'S TALK —&nbsp;</div>
+  <div style="position:relative">
+    <p class="en-title">Let's Talk<span class="sun"></span></p>
+    <h2>まずは、カジュアルに話を聞いてみる。</h2>
+    <p>まずは“面談”という形で、ざっくばらんにお話しすることから始めています。今の思い、挑戦してみたいこと。あなたの声を聞かせてください。</p>
+    <div class="hero__cta">
+      <a href="/contact" class="btn btn--o">話を聞いてみる（簡単応募）<span class="arrow">→</span></a>
+      <a href="#job" class="btn btn--w">募集要項を見る <span class="arrow">↑</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="float" id="float"><a href="/contact"><i>GO</i><span><small>まずは気軽に面談から</small>話を聞いてみる（簡単応募）</span></a></div>

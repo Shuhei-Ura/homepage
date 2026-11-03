@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{{ titles }}}
+    {{{ descriptions }}}
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+    {{{ styles }}}    <!-- ページ専用のCSS -->
+</head>
+<body>
+    <header class="hdr{{#unless isHome}} is-scrolled is-solid{{/unless}}" id="hdr">
+        <div class="container hdr__in">
+            <a href="/" class="logo"><img src="/images/company-logo-removebg-preview.png" alt="株式会社Respoint Okinawaのロゴ"></a>
+            <nav class="nav" aria-label="メインメニュー">
+                <a href="/#reason">選ばれる理由</a>
+                <a href="/#roadmap">研修</a>
+                <a href="/#projects">実績・キャリア</a>
+                <a href="/#env">働く環境</a>
+                <a href="/#company">会社紹介</a>
+                <a href="/#blog">ブログ</a>
+                <a href="/contact" class="btn btn--o btn--sm">話を聞いてみる</a>
+            </nav>
+            <button class="menu-btn" id="menuBtn" type="button" aria-label="メニューを開閉" aria-controls="drawer" aria-expanded="false"><span></span><span></span></button>
+        </div>
+    </header>
+    <div class="drawer" id="drawer">
+        <a href="/#reason">選ばれる理由<small>REASON</small></a>
+        <a href="/#roadmap">研修ロードマップ<small>ROADMAP</small></a>
+        <a href="/#projects">実績・キャリア<small>PROJECTS</small></a>
+        <a href="/#env">働く環境<small>OKINAWA</small></a>
+        <a href="/#company">会社紹介<small>COMPANY</small></a>
+        <a href="/#blog">ブログ<small>BLOG</small></a>
+        <a href="/#job">募集要項<small>JOB</small></a>
+        <a href="/contact">話を聞いてみる<small>CONTACT</small></a>
+    </div>
+
+    <main{{#unless isHome}} class="page"{{/unless}}>
+    {{{body}}}
+    </main>
+
+    <footer class="ftr">
+        <div class="container ftr__grid">
+            <div>
+                <a href="/" class="logo"><img src="/images/company-logo-removebg-preview.png" alt="株式会社Respoint Okinawaのロゴ"></a>
+                <address>〒900-0004 沖縄県那覇市銘苅2丁目3-1<br>なは産業支援センターBコア1階<br>E-mail: s-ura@respoint-okinawa.com</address>
+            </div>
+            <div>
+                <nav aria-label="フッターメニュー">
+                    <a href="/#reason">選ばれる理由</a><a href="/#roadmap">研修</a><a href="/#projects">実績</a><a href="/#env">働く環境</a><a href="/#company">会社紹介</a><a href="/#blog">ブログ</a><a href="https://respoint.zohosites.com/">Zoho</a><a href="/contact">お問い合わせ</a>
+                </nav>
+                <p class="ftr__copy">© 2025–2026 Respoint Okinawa Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/site.js"></script>
+    {{{ _sections.scripts }}}
+</body>
+</html>
