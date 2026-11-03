@@ -1,20 +1,51 @@
-<section class="blogdetail-container">
-  <article class="blogdetail-article">
-    <header class="blogdetail-header">
-      <h1 class="blogdetail-title">{{post.title}}</h1>
-      <div class="blogdetail-meta">
-        <time datetime="{{post.created_at}}" class="date">{{post.created_at}}</time>
-        <span class="author">投稿者：{{post.author_name}}</span>
-        <span class="pill {{roleClass}}">{{roleLabel}}</span>
-      </div>
-    </header>
+{{#section "scripts"}}
+  <script src="/js/blog-content.js"></script>
+{{/section}}
 
-    <div class="blogdetail-content">
-      {{{post.content}}}
+<div class="progress" id="progress"></div>
+
+<div class="container">
+  <header class="a-head">
+    <p class="crumb"><a href="/">トップ</a> ／ <a href="/#blog">ブログ</a> ／ 記事</p>
+    <div class="meta">
+      <time datetime="{{post.created_at_iso}}">{{post.created_at}}</time>
+      <span class="pill">代表の経営記録</span>
     </div>
+    <h1>{{post.title}}</h1>
+    <div class="author-mini"><img src="/images/shuhei-img.jpeg" alt=""><span><small>投稿者</small>{{post.author_name}}</span></div>
+  </header>
+
+  {{!-- 本文は投稿画面で入力した平文のまま。エスケープして改行だけ CSS(pre-line) で保持する --}}
+  <article class="a-body">
+    <div class="content">{{post.content}}</div>
   </article>
 
-  <div class="blogdetail-footer">
-    <a href="/blog-list" class="btn-back">← 一覧へ戻る</a>
+  <div class="a-foot">
+    <div class="author">
+      <img src="/images/shuhei-img.jpeg" alt="代表 浦周平">
+      <div>
+        <b>WRITER</b>
+        <h3>{{post.author_name}} <small>株式会社Respoint Okinawa 代表</small></h3>
+        <p>営業職を経て、沖縄で未経験からエンジニアを育てる会社を創業。経営や人の育て方について、日々考えていることを書いています。</p>
+      </div>
+    </div>
+
+    <div class="recruit">
+      <div>
+        <b>RECRUIT</b>
+        <h3>この考え方に共感したら。</h3>
+        <p>未経験からエンジニアへ。まずは気軽に面談から。</p>
+      </div>
+      <a href="/contact" class="btn btn--o">話を聞いてみる <span class="arrow">→</span></a>
+    </div>
+
+    {{#if (or prevPost nextPost)}}
+    <nav class="pager" aria-label="前後の記事">
+      {{#if prevPost}}<a href="/blog/{{prevPost.id}}"><small>← PREV</small><span>{{prevPost.title}}</span></a>{{/if}}
+      {{#if nextPost}}<a href="/blog/{{nextPost.id}}" class="next"><small>NEXT →</small><span>{{nextPost.title}}</span></a>{{/if}}
+    </nav>
+    {{/if}}
+
+    <div class="back"><a href="/#blog" class="btn btn--w">ブログ一覧へ戻る <span class="arrow">↩</span></a></div>
   </div>
-</section>
+</div>

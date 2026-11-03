@@ -1,59 +1,51 @@
-.blogdetail-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px 80px;
-}
+/* ブログ記事ページ */
+/* 読み進み具合のバー */
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--orange);transform-origin:left;transform:scaleX(0);z-index:60}
 
-.blogdetail-title {
-  font-size: 28px;
-  font-weight: 800;
-  margin-bottom: 16px;
-  line-height: 1.3;
-}
+/* article head */
+.a-head{max-width:820px;margin:0 auto;padding:70px 0 40px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font-size:13px;color:var(--muted);margin-bottom:18px}
+.meta time{font-family:var(--en);font-weight:600;color:var(--orange);font-size:14px}
+.pill{font-size:12px;font-weight:700;padding:3px 12px;border-radius:999px;background:var(--navy);color:#fff}
+.a-head h1{font-size:clamp(26px,3.6vw,40px);font-weight:900;line-height:1.5;margin:0;color:var(--navy)}
+.author-mini{display:flex;align-items:center;gap:12px;margin-top:26px;font-size:14px;font-weight:700}
+.author-mini img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.author-mini small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
 
-.blogdetail-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 14px;
-  color: #667085;
-  margin-bottom: 32px;
-}
+/* article body */
+.a-body{max-width:820px;margin:0 auto;background:#fff;border-radius:32px;padding:64px 72px;box-shadow:0 20px 50px -30px rgba(20,33,61,.2)}
+@media (max-width:640px){.a-body{padding:34px 22px;border-radius:24px}}
+.content{font-size:17px;line-height:2.1;color:#2a3550;white-space:pre-line;overflow-wrap:anywhere;letter-spacing:.02em}
+@media (max-width:640px){.content{font-size:16px;line-height:2}}
 
-.pill {
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid;
-}
-.pill-admin { color: #b15b00; border-color: #ffd8a8; background: #fff3e0; }
-.pill-emp   { color: #0f6b37; border-color: #b8f0d2; background: #e9fbf1; }
+/* 著者ボックス＋採用への導線 */
+.a-foot{max-width:820px;margin:40px auto 0}
+.author{display:grid;grid-template-columns:120px 1fr;gap:28px;align-items:center;background:#fff;border-radius:28px;padding:32px 36px}
+.author img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.author b{font-family:var(--en);font-size:12px;letter-spacing:.12em;color:var(--orange)}
+.author h3{margin:2px 0 6px;font-size:18px;font-weight:900}
+.author p{margin:0;font-size:14px;color:var(--muted)}
+@media (max-width:640px){.author{grid-template-columns:1fr;text-align:center;padding:28px 22px}.author img{margin:0 auto}}
 
-.blogdetail-content {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #333;
-  white-space: pre-line; /* 改行保持 */
-  margin-bottom: 40px;
-}
+.recruit{margin-top:24px;border-radius:28px;background:var(--navy);color:#fff;padding:40px 44px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden}
+.recruit::after{content:"";position:absolute;right:-60px;bottom:-80px;width:150px;height:150px;opacity:.9;border-radius:50%;background:var(--orange)}
+.recruit div{position:relative;z-index:1}
+.recruit b{font-family:var(--en);font-size:12px;letter-spacing:.12em;color:var(--orange)}
+.recruit h3{margin:4px 0 6px;font-size:20px;font-weight:900}
+.recruit p{margin:0;font-size:14px;color:#c4d1ea}
+.recruit .btn{position:relative;z-index:1;flex:none}
+@media (max-width:760px){.recruit{flex-direction:column;align-items:flex-start;padding:32px 24px}}
 
-.blogdetail-footer {
-  text-align: center;
-}
+/* 前後の記事 */
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.pager a{background:#fff;border-radius:22px;padding:22px 26px;transition:transform .2s}
+.pager a:hover{transform:translateY(-3px)}
+.pager small{display:block;font-family:var(--en);font-size:12px;font-weight:600;color:var(--orange);margin-bottom:4px}
+.pager span{font-weight:700;font-size:15px;line-height:1.6}
+.pager a.next{text-align:right}
+@media (max-width:640px){.pager{grid-template-columns:1fr}.pager a.next{text-align:left}}
+.back{text-align:center;margin:50px 0 120px}
 
-.btn-back {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-size: 14px;
-  text-decoration: none;
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #ddd;
-  transition: background .15s ease, transform .1s ease;
-}
-.btn-back:hover {
-  background: #eaeaea;
-  transform: translateY(-1px);
-}
+.author h3 small{font-size:12px;color:var(--muted);font-weight:500}
+.pager a.next{grid-column:2}
+@media (max-width:640px){.pager a.next{grid-column:auto}}

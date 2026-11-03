@@ -1,5 +1,8 @@
-<section>
-    <h1>404 - ページが見つかりません</h1>
-    <p>お探しのページは存在しないか、移動した可能性があります。</p>
-    <p><a href="/">トップページへ戻る</a></p>
+<section class="notfound">
+  <div class="container">
+    <p class="en-title">{{#if code}}{{code}}{{else}}404{{/if}}<span class="sun"></span></p>
+    <h1>{{#if heading}}{{heading}}{{else}}ページが見つかりません{{/if}}</h1>
+    <p>{{#if message}}{{message}}{{else}}お探しのページは存在しないか、移動した可能性があります。{{/if}}</p>
+    <a href="/" class="btn btn--o">トップページへ戻る <span class="arrow">→</span></a>
+  </div>
 </section>
