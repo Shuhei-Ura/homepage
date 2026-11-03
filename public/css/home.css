@@ -1,7 +1,7 @@
 /* トップページ（LP） */
 /* ===== HERO ===== */
 .hero{padding-top:110px;position:relative;overflow:hidden}
-.strip{display:flex;gap:28px;padding-right:28px;width:max-content;animation:strip3 38s linear infinite}
+.strip{display:flex;gap:28px;padding-right:28px;width:max-content;animation:strip3 60s linear infinite}
 @keyframes strip3{to{transform:translateX(calc(-100% / 3))}}
 .strip:hover{animation-play-state:paused}
 @keyframes strip{to{transform:translateX(-50%)}}
